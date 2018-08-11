@@ -99,10 +99,16 @@
     <Compile Include="Route.cs">
       <DependentUpon>OrmLite.Poco.tt</DependentUpon>
     </Compile>
+    <Compile Include="Security_Function.cs">
+      <DependentUpon>OrmLite.Poco.tt</DependentUpon>
+    </Compile>
     <Compile Include="Security_Permission.cs">
       <DependentUpon>OrmLite.Poco.tt</DependentUpon>
     </Compile>
     <Compile Include="Security_Role.cs">
+      <DependentUpon>OrmLite.Poco.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Security_RoleFunctionPermision.cs">
       <DependentUpon>OrmLite.Poco.tt</DependentUpon>
     </Compile>
     <Compile Include="Security_UserPermission.cs">

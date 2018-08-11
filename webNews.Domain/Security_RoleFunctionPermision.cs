@@ -14,18 +14,15 @@ using ServiceStack;
 
 namespace webNews.Domain.Entities
 {
-	[Alias("MenuFE")]
-    public partial class MenuFE : IHasId<int> 
+	[Alias("Security_RoleFunctionPermision")]
+    public partial class Security_RoleFunctionPermision : IHasId<int> 
     {
         [Alias("Id")]
-        [Required]
+        [AutoIncrement]
         public int Id { get; set; }
-        public int? ParentId { get; set; }
-        public string Name { get; set; }
-        public string Slug { get; set; }
-        public bool? Show { get; set; }
-        public int? MenuLevel { get; set; }
-        public int? Order { get; set; }
+        public int? RoleId { get; set; }
+        public int? FunctionId { get; set; }
+        public int? PermissionId { get; set; }
     }
 
 }
