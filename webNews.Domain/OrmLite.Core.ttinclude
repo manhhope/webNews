@@ -1268,7 +1268,7 @@ class SqlServerSchemaReader : SchemaReader
 
     const string TABLE_SQL=@"SELECT * FROM  INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE='BASE TABLE' OR TABLE_TYPE='VIEW'
 								UNION
-							SELECT SPECIFIC_CATALOG, SPECIFIC_SCHEMA, SPECIFIC_NAME, 'TVF' FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_TYPE = 'FUNCTION' AND DATA_TYPE = 'TABLE'";
+							SELECT SPECIFIC_CATALOG, SPECIFIC_SCHEMA, SPECIFIC_NAME, 'TVF' FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_TYPE = 'Security_Function' AND DATA_TYPE = 'TABLE'";
 
     const string COLUMN_SQL=@"SELECT T.[Database] ,
 									   T.Owner ,
@@ -1970,8 +1970,8 @@ class OracleSchemaReader : SchemaReader
 
 	string GetPK(string table){
 
-		string sql=@"select column_name from USER_CONSTRAINTS uc
-  inner join USER_CONS_COLUMNS ucc on uc.constraint_name = ucc.constraint_name
+		string sql=@"select column_name from System_User_CONSTRAINTS uc
+  inner join System_User_CONS_COLUMNS ucc on uc.constraint_name = ucc.constraint_name
 where uc.constraint_type = 'P'
 and uc.table_name = upper(:tableName)
 and ucc.position = 1";
@@ -2064,11 +2064,11 @@ and ucc.position = 1";
 
 
 
-	const string TABLE_SQL=@"select TABLE_NAME, 'Table' TABLE_TYPE, USER TABLE_SCHEMA
-from USER_TABLES
+	const string TABLE_SQL=@"select TABLE_NAME, 'Table' TABLE_TYPE, System_User TABLE_SCHEMA
+from System_User_TABLES
 union all
-select VIEW_NAME, 'View', USER
-from USER_VIEWS";
+select VIEW_NAME, 'View', System_User
+from System_User_VIEWS";
 
 
 	const string COLUMN_SQL=@"select table_name TableName,
@@ -2076,7 +2076,7 @@ from USER_VIEWS";
  data_type DataType,
  data_scale DataScale,
  nullable IsNullable
- from USER_TAB_COLS utc
+ from System_User_TAB_COLS utc
  where table_name = :tableName
  order by column_id";
 

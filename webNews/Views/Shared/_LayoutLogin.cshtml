@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" sizes="16x16" href=""~/Theme/plugins/images/favicon.png">
+    <title>@ViewBag.Title</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="~/Theme/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- animation CSS -->
+    <link href="~/Theme/css/animate.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="~/Theme/css/style.css" rel="stylesheet">
+    <!-- color CSS -->
+    <link href="~/Theme/css/colors/default.css" id="theme" rel="stylesheet" />
+
+</head>
+<body>
+    @RenderBody()
+    <!-- jQuery -->
+    <script src="~/Theme/plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="~/Theme/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Menu Plugin JavaScript -->
+    <script src="~/Theme/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
+
+    <!--slimscroll JavaScript -->
+    <script src="~/Theme/js/jquery.slimscroll.js"></script>
+    <!--Wave Effects -->
+    <script src="~/Theme/js/waves.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="~/Theme/js/custom.min.js"></script>
+    <!--Style Switcher -->
+    <script src="~/Theme/plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+

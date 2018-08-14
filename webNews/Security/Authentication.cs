@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Web;
 using System.Web.SessionState;
-
+using webNews.Domain.Entities;
 using static System.String;
 
 namespace webNews.Security
@@ -57,18 +57,12 @@ namespace webNews.Security
             if (HttpContext.Current == null) return;
             HttpContext.Current.Session["languagecode"] = language;
         }
-        public static void MarkAuthenticate(Security_User user, Core_Customer customer, Core_VwPartnerCustomer partner)
+        public static void MarkAuthenticate(System_User user, Vw_UserInfo userInfo)
         {
             HttpContext.Current.Session["username"] = user.UserName;
             HttpContext.Current.Session["userid"] = user.Id;
-            HttpContext.Current.Session["usercustomer"] = customer;
-            if (partner != null)
-            {
-                HttpContext.Current.Session["customerpartner"] = partner;
-                HttpContext.Current.Session["partnercode"] = partner.PartnerCode;
-                HttpContext.Current.Session["partnerID"] = partner.PartnerID;
-                HttpContext.Current.Session["partnerName"] = partner.PartnerName;
-            }
+            HttpContext.Current.Session["===user==="] = user;
+            HttpContext.Current.Session["===userInfo==="] = userInfo;
         }
         public static void MarkPermission(List<Security_VwRoleService> permission)
         {
@@ -110,33 +104,19 @@ namespace webNews.Security
             return (int)HttpContext.Current.Session["userid"];
 
         }
-        public static Core_Customer GetCustomer()
+        public static System_User GetUser()
         {
             if (HttpContext.Current == null) return null;
-            if (HttpContext.Current.Session["usercustomer"] == null) return null;
-            return (Core_Customer)HttpContext.Current.Session["usercustomer"];
+            if (HttpContext.Current.Session["===user==="] == null) return null;
+            return (System_User)HttpContext.Current.Session["===user==="];
         }
-        public static string GetPartnerCode()
+        public static Vw_UserInfo GetUserInfo()
         {
             if (HttpContext.Current == null) return null;
-            if (HttpContext.Current.Session["partnercode"] == null) return null;
-            return (string)HttpContext.Current.Session["partnercode"];
-
+            if (HttpContext.Current.Session["===userInfo==="] == null) return null;
+            return (Vw_UserInfo)HttpContext.Current.Session["===userInfo==="];
         }
-        public static string GetPartnerName()
-        {
-            if (HttpContext.Current == null) return null;
-            if (HttpContext.Current.Session["partnerName"] == null) return null;
-            return (string)HttpContext.Current.Session["partnerName"];
 
-        }
-        public static int GetPartnerId()
-        {
-            if (HttpContext.Current == null) return -1;
-            if (HttpContext.Current.Session["partnerID"] == null) return -1;
-            return (int)HttpContext.Current.Session["partnerID"];
-
-        }
         static bool CheckPermissionMenu(System_Menu item, List<System_Menu> listMenus)
         {
 
@@ -170,6 +150,38 @@ namespace webNews.Security
 
                 if (listChild.Any())
                 {
+                    menu += "<li> <a href=\"index.html\" class=\"waves-effect\"><i class=\"mdi mdi-av-timer fa-fw\" data-icon=\"v\"></i> <span class=\"hide-menu\">" + 
+                        item.Text.ToUpper() +
+                        "<span class=\"fa arrow\"></span> </span></a>";
+                    if (item.MenuLevel != null)
+                        menu += "<ul class='nav nav-" + ((MenuLevel)item.MenuLevel).ToString("G") + "-level'>";
+                    menu = listChild.Aggregate(menu, (current, submenu) => current + BuildMenu(submenu, listMenus));
+                    menu += "</ul></li>";
+                }
+                else
+                {
+                    if(item.Area == "") { 
+                        menu += Format("<li><a href='/" + (!string.IsNullOrEmpty(item.AliasUrl) ? item.AliasUrl : item.Controller) + "'>" + "&nbsp;<i class=\"ti-info-alt fa-fw\"></i>&nbsp;<span class=\"hide-menu\">" + item.Text + "</span></a></li>");
+                    }
+                    else
+                    {
+                        menu += Format("<li><a href='/" + item.Area + "/" + (!string.IsNullOrEmpty(item.AliasUrl)?item.AliasUrl : item.Controller) + "'>" + "&nbsp;<i class=\"ti-info-alt fa-fw\"></i>&nbsp;<span class=\"hide-menu\">&nbsp;" + item.Text + "</span></a></li>");
+                    }
+                }
+            }
+            return menu;
+        }
+        static string BuildMenu1(System_Menu item, List<System_Menu> listMenus)
+        {
+
+
+            var menu = "";
+            if (CheckPermissionMenu(item, listMenus))
+            {
+                var listChild = listMenus.Where(p => p.ParentId == item.Id).OrderBy(p => p.MenuOrder);
+
+                if (listChild.Any())
+                {
                     menu += "<li><a><i class='fa fa-plus - square' aria-hidden='true'></i> " + item.Text.ToUpper() + "<span class='fa arrow'></span></a>";
                     if (item.MenuLevel != null)
                         menu += "<ul class='nav nav-" + ((MenuLevel)item.MenuLevel).ToString("G") + "-level menu-level'>";
@@ -178,12 +190,13 @@ namespace webNews.Security
                 }
                 else
                 {
-                    if(item.Area == "") { 
+                    if (item.Area == "")
+                    {
                         menu += Format("<li><a href='/" + (!string.IsNullOrEmpty(item.AliasUrl) ? item.AliasUrl : item.Controller) + "'>" + "&nbsp;<i class='fa fa-hand-o-right' aria-hidden='true'></i>&nbsp;" + item.Text + "</a></li>");
                     }
                     else
                     {
-                        menu += Format("<li><a href='/" + item.Area + "/" + (!string.IsNullOrEmpty(item.AliasUrl)?item.AliasUrl : item.Controller) + "'>" + "&nbsp;<i class='fa fa-hand-o-right' aria-hidden='true'></i>&nbsp;" + item.Text + "</a></li>");
+                        menu += Format("<li><a href='/" + item.Area + "/" + (!string.IsNullOrEmpty(item.AliasUrl) ? item.AliasUrl : item.Controller) + "'>" + "&nbsp;<i class='fa fa-hand-o-right' aria-hidden='true'></i>&nbsp;" + item.Text + "</a></li>");
                     }
                 }
             }
@@ -207,12 +220,7 @@ namespace webNews.Security
         public static bool IsUserBackEnd()
         {
             if (GetUserName() == null) return false;
-            return GetCustomer().CustomerType == 1;
-        }
-        public static bool IsPartner()
-        {
-            if (GetUserName() == null || GetPartnerCode() == null) return false;
-            return GetCustomer().CustomerType == 3;
+            return true;
         }
     }
     public enum MenuLevel

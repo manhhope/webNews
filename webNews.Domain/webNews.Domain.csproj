@@ -33,6 +33,9 @@
     <Reference Include="Autofac, Version=4.8.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\packages\Autofac.4.8.1\lib\net45\Autofac.dll</HintPath>
     </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.5.8\lib\net45\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="ServiceStack, Version=5.0.0.0, Culture=neutral, PublicKeyToken=02c12cbda47e6587, processorArchitecture=MSIL">
       <HintPath>..\packages\ServiceStack.5.1.0\lib\net45\ServiceStack.dll</HintPath>
     </Reference>
@@ -57,6 +60,10 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -96,6 +103,16 @@
     <Compile Include="ProjectCategory.cs">
       <DependentUpon>OrmLite.Poco.tt</DependentUpon>
     </Compile>
+    <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="Repositories\ISystemRepository.cs" />
+    <Compile Include="Repositories\IUserRepository.cs" />
+    <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="Repositories\RoleManagement\IRoleManagementRepository.cs" />
+    <Compile Include="Repositories\RoleManagement\RoleManagementRepository.cs" />
+    <Compile Include="Repositories\RoleManage\IRoleManageRepository.cs" />
+    <Compile Include="Repositories\RoleManage\RoleManageRepository.cs" />
+    <Compile Include="Repositories\SystemRepository.cs" />
+    <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Route.cs">
       <DependentUpon>OrmLite.Poco.tt</DependentUpon>
     </Compile>
@@ -117,13 +134,37 @@
     <Compile Include="Security_UserRole.cs">
       <DependentUpon>OrmLite.Poco.tt</DependentUpon>
     </Compile>
+    <Compile Include="Security_VwRoleService.cs">
+      <DependentUpon>OrmLite.Poco.tt</DependentUpon>
+    </Compile>
     <Compile Include="Service.cs">
       <DependentUpon>OrmLite.Poco.tt</DependentUpon>
     </Compile>
+    <Compile Include="Services\IService.cs" />
+    <Compile Include="Services\ISystemService.cs" />
+    <Compile Include="Services\RoleManagement\IRoleManagementService.cs" />
+    <Compile Include="Services\RoleManagement\RoleManagementService.cs" />
+    <Compile Include="Services\RoleManage\IRoleManageService.cs" />
+    <Compile Include="Services\RoleManage\RoleManageService.cs" />
+    <Compile Include="Services\Service.cs" />
+    <Compile Include="Services\SystemService.cs" />
     <Compile Include="sysdiagrams.cs">
       <DependentUpon>OrmLite.Poco.tt</DependentUpon>
     </Compile>
+    <Compile Include="System_Menu.cs">
+      <DependentUpon>OrmLite.Poco.tt</DependentUpon>
+    </Compile>
     <Compile Include="System_User.cs">
+      <DependentUpon>OrmLite.Poco.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Temp_Code.cs">
+      <DependentUpon>OrmLite.Poco.tt</DependentUpon>
+    </Compile>
+    <Compile Include="USER.cs" />
+    <Compile Include="Vw_Core_User.cs">
+      <DependentUpon>OrmLite.Poco.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Vw_UserInfo.cs">
       <DependentUpon>OrmLite.Poco.tt</DependentUpon>
     </Compile>
     <Compile Include="WebNewsDbConnectionFactory.cs" />
@@ -141,6 +182,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="OrmLite.Core.ttinclude" />
     <None Include="packages.config" />
   </ItemGroup>
@@ -159,8 +206,16 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entities\" />
-    <Folder Include="Repositories\" />
-    <Folder Include="Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\webNews.Models\webNews.Models.csproj">
+      <Project>{854d1f5a-aee4-4d32-8f26-6869a820203c}</Project>
+      <Name>webNews.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\webNews.Shared\webNews.Shared.csproj">
+      <Project>{d5b73ffd-8b69-431b-9b51-66a279980bbb}</Project>
+      <Name>webNews.Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

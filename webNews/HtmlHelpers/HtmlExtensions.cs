@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq.Expressions;
-using System.Resources;
-using System.Text;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
@@ -32,11 +29,11 @@ namespace ZP.AnPos.Web.HtmlHelpers
         {
             return MvcHtmlString.Create(htmlHelper.ValidationMessage(modelName).ToString().Replace("span", "div"));
         }
-        public static MvcHtmlString Resource<T>(this HtmlHelper<T> html, string key)
-        {
-            var resourceSet = ZP.AnPos.Resources.Language.ResourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
-            var val = resourceSet.GetString(key);
-            return MvcHtmlString.Create(String.IsNullOrEmpty(val) ? key : val);
-        }
+        //public static MvcHtmlString Resource<T>(this HtmlHelper<T> html, string key)
+        //{
+        //    var resourceSet = webNews.Language.Language.ResourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
+        //    var val = resourceSet.GetString(key);
+        //    return MvcHtmlString.Create(String.IsNullOrEmpty(val) ? key : val);
+        //}
     }
 }

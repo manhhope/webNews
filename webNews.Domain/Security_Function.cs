@@ -22,6 +22,7 @@ namespace webNews.Domain.Entities
         public int Id { get; set; }
         public string FunctionCode { get; set; }
         public string FunctionName { get; set; }
+        public string IDINSYSTEM { get; set; }
     }
 
 }

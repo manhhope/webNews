@@ -20,8 +20,6 @@ namespace webNews.Security
                 {
                     controllerName = routeValues["controller"].ToString();
                 }
-                if (controllerName == "charging")
-                    controllerName += "/" + routeValues["action"].ToString();
                 controllerName = controllerName.ToLower();
                
                 //return true;

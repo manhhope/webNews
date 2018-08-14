@@ -1,0 +1,60 @@
+﻿@using webNews.Security
+<div class="navbar-default sidebar" role="navigation">
+    <div class="sidebar-nav slimscrollsidebar">
+        <div class="sidebar-head">
+            <h3><span class="fa-fw open-close"><i class="ti-close ti-menu"></i></span> <span class="hide-menu">Navigation</span></h3>
+        </div>
+        <div class="user-profile">
+            <div class="dropdown user-pro-body">
+                <div>
+                    @{
+                        @*if (Authentication.GetUserAvatar() != "" && Authentication.GetUserAvatar() != null)
+                        {
+                            <img src="@Authentication.GetUserAvatar()" alt="@Authentication.GetUserName()" class="img-circle">
+                        }
+                        else
+                        {*@
+                        var ran = new Random();
+                        var index = ran.Next(2, 14);
+                        string avatar = "Content/avatar/a" + index + ".png";
+                        <img src="@avatar" alt="@Authentication.GetUserName()" class="img-circle">
+                        @* } *@
+                    }
+                </div>
+                <a href="index.html#" class="dropdown-toggle u-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    @Authentication.GetUserName()
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu animated flipInY">
+                <li><a href="index.html#"><i class="ti-user"></i> My Profile</a></li>
+                <li><a href="index.html#"><i class="ti-wallet"></i> My Balance</a></li>
+                <li><a href="index.html#"><i class="ti-email"></i> Inbox</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="index.html#"><i class="ti-settings"></i> Account Setting</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="login.html"><i class="fa fa-power-off"></i> Logout</a></li>
+            </ul>
+        </div>
+    </div>
+    <ul class="nav" id="side-menu">
+        @Html.Raw(Authentication.GetMenu())
+        <li>
+            <a href="index.html" class="waves-effect">
+                <i class="mdi mdi-av-timer fa-fw" data-icon="v"></i>
+                <span class="hide-menu"> Dashboard <span class="fa arrow"></span> </span>
+            </a>
+            <ul class="nav nav-second-level">
+                <li> <a href="index.html"><i class=" fa-fw">1</i><span class="hide-menu">Dashboard 1</span></a> </li>
+                <li> <a href="index2.html"><i class=" fa-fw">2</i><span class="hide-menu">Dashboard 2</span></a> </li>
+                <li> <a href="index3.html"><i class=" fa-fw">3</i><span class="hide-menu">Dashboard 3</span></a> </li>
+            </ul>
+        </li>
+
+        <li><a href="login.html" class="waves-effect"><i class="mdi mdi-logout fa-fw"></i> <span class="hide-menu">Log out</span></a></li>
+        <li class="devider"></li>
+        <li><a href="documentation.html" class="waves-effect"><i class="far fa-circle text-danger"></i> <span class="hide-menu">Documentation</span></a></li>
+        <li><a href="gallery.html" class="waves-effect"><i class="far fa-circle text-info"></i> <span class="hide-menu">Gallery</span></a></li>
+        <li><a href="faq.html" class="waves-effect"><i class="far fa-circle text-success"></i> <span class="hide-menu">Faqs</span></a></li>
+    </ul>
+</div>
+</div>

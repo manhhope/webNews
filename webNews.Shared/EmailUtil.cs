@@ -32,7 +32,7 @@ namespace webNews.Shared
                     Credentials = new NetworkCredential(sender, password),
                     Timeout = 10000
                 };
-                var from = new MailAddress(sender, "ZoTop System");
+                var from = new MailAddress(sender, "System");
 
                 var mailList = email.Split(';');
 
