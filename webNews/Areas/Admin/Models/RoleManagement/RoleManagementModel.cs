@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
-namespace webNews.Web.Areas.Admin.Models.RoleManagement
+namespace webNews.Areas.Admin.Models.RoleManagement
 {
     public class RoleManagementModel
     {

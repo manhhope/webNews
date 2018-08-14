@@ -10,8 +10,8 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using webNews.Controllers;
 using webNews.Domain;
-using webNews.Web.Services.SecurityService;
-using ZP.AnPos.Shared;
+using webNews.Shared;
+using webNews.Services.SecurityService;
 
 namespace webNews
 {

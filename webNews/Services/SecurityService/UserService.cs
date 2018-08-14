@@ -13,7 +13,7 @@ using webNews.Shared;
 using webNews.Domain.Entities;
 using webNews.Security;
 
-namespace webNews.Web.Services.SecurityService
+namespace webNews.Services.SecurityService
 {
     public class UserService : IUserService
     {

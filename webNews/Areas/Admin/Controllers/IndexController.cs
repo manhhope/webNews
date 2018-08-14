@@ -2,7 +2,7 @@
 using NLog;
 using webNews.Security;
 
-namespace webNews.Web.Areas.Admin.Controllers
+namespace webNews.Areas.Admin.Controllers
 {
     public class IndexController : Controller
     {

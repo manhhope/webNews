@@ -4,11 +4,11 @@ using webNews.Language.Language;
 using webNews.Security;
 using NLog;
 using webNews.Models.Common;
-using webNews.Web.Areas.Admin.Models;
+using webNews.Areas.Admin.Models;
 using webNews.Domain.Entities;
 using webNews.Domain.Services;
 
-namespace webNews.Web.Areas.Admin.Controllers
+namespace webNews.Areas.Admin.Controllers
 {
     public class PermissionManageController : Controller
     {

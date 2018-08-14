@@ -11,7 +11,7 @@ using webNews.Models.Common;
 using NLog;
 using webNews.Security;
 
-namespace webNews.Web.Controllers
+namespace webNews.Controllers
 {
 
     public class BaseController : Controller

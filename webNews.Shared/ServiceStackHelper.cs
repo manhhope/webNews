@@ -1,7 +1,7 @@
 ﻿using System;
 using ServiceStack;
 
-namespace ZP.AnPos.Shared
+namespace webNews.Shared
 {
     public static class ServiceStackHelper
     {

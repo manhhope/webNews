@@ -4,7 +4,7 @@ using webNews.Domain.Entities;
 using webNews.Models;
 using webNews.Models.User;
 
-namespace webNews.Web.Services.SecurityService
+namespace webNews.Services.SecurityService
 {
     public interface IUserService
     {

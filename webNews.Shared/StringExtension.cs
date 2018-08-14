@@ -1,6 +1,6 @@
 ﻿using ServiceStack;
 
-namespace ZP.AnPos.Shared
+namespace webNews.Shared
 {
     public static class StringExtension
     {

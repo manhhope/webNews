@@ -4,16 +4,16 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.SessionState;
 using webNews.Models;
-using webNews.Web.Areas.Admin.Models.Login;
+using webNews.Areas.Admin.Models.Login;
 using NLog;
 using ServiceStack.Caching;
 using webNews.Models.Common;
 using System.Threading.Tasks;
 using webNews.Domain.Entities;
 using webNews.Security;
-using webNews.Web.Services.SecurityService;
+using webNews.Services.SecurityService;
 
-namespace webNews.Web.Areas.Admin.Controllers
+namespace webNews.Areas.Admin.Controllers
 {
     public class LoginController : Controller
     {

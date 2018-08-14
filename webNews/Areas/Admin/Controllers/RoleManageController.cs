@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using webNews.Domain;
 using webNews.Language.Language;
-using webNews.Web.Areas.Admin.Models;
-using webNews.Web.Controllers;
+using webNews.Areas.Admin.Models;
+using webNews.Controllers;
 using webNews.Domain.Services.RoleManage;
 using NLog;
 using webNews.Security;
 using webNews.Domain.Entities;
 
-namespace webNews.Web.Areas.Admin.Controllers
+namespace webNews.Areas.Admin.Controllers
 {
     public class RoleManageController : BaseController
     {

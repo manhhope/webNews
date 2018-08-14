@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using webNews.Security;
 
-namespace webNews.Web.Areas.Admin.Models.Login
+namespace webNews.Areas.Admin.Models.Login
 {
     public class LoginModel
     {

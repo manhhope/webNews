@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
 
-namespace webNews.Web.Services.Common
+namespace webNews.Services.Common
 {
     public class ConstantService : IConstantService
     {

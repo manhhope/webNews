@@ -1,4 +1,4 @@
-﻿using webNews.Web.Controllers;
+﻿using webNews.Controllers;
 using NLog;
 using System;
 using System.Web.Mvc;
@@ -9,7 +9,7 @@ using webNews.Security;
 using webNews.Domain.Services.RoleManage;
 using webNews.Domain.Entities;
 
-namespace webNews.Web.Areas.Admin.Controllers
+namespace webNews.Areas.Admin.Controllers
 {
     public class RoleManagementController : BaseController
     {

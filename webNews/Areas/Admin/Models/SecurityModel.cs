@@ -5,7 +5,7 @@ using webNews.Domain;
 using webNews.Domain.Entities;
 using webNews.Language.Language;
 
-namespace webNews.Web.Areas.Admin.Models
+namespace webNews.Areas.Admin.Models
 {
     public class SecurityModel
     {

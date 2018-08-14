@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Web.Mvc;
 
-namespace webNews.Web.Areas.Admin
+namespace webNews.Areas.Admin
 {
     public class AdminAreaRegistration : AreaRegistration
     {
