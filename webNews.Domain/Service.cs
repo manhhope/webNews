@@ -15,11 +15,11 @@ using ServiceStack;
 namespace webNews.Domain.Entities
 {
 	[Alias("Service")]
-    public partial class Service : IHasId<long> 
+    public partial class Service : IHasId<int> 
     {
         [Alias("Id")]
         [AutoIncrement]
-        public long Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Slug { get; set; }
         public string Action { get; set; }

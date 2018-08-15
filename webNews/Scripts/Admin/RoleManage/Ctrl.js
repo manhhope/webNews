@@ -55,7 +55,7 @@ var RoleService = function () {
                     formatter: function (value, row, index) {
 
                         var str = "<button data-id='%s' id='btnViewRoleService' class='OpenViewItem btn btn-primary btn-in-table hidden' title='%s'><i class='fa fa-info-circle'></i></button>";
-                        str = "<button data-id='%s' id='btnEditRoleService'  class='OpenEditItem btn btn-primary btn-in-table' title='%s'><i class='fa fa-pencil-square-o'></i></button>";
+                        str = "<button data-id='%s' id='btnEditRoleService'  class='OpenEditItem btn btn-primary btn-in-table' title='%s'><i class='fas fa-edit'></i></button>";
                         str += "<button data-id='%s'  id='btnRemoveRoleService' class='OpenRemoveItem btn btn-primary btn-in-table hidden' title='%s'><i class='fa fa-times'></i></button>";
                         return Sv.Sprintf(str, row.Id, "Xem", row.Id, "Chỉnh sửa", row.Id, "Xóa"); //, data.CustomerCode, language.Table_BtnRemove);
 

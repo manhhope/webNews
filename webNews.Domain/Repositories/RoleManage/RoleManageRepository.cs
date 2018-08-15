@@ -200,7 +200,7 @@ namespace webNews.Domain.Repositories.RoleManage
                     var query = db.From<Security_Role>();
                     var list = db.Select(query).Select(_ => new SelectListModel
                     {
-                        Value = Convert.ToInt32(_.Id),
+                        Value = _.Id,
                         Text = _.RoleName
                     }).ToList();
                     return list;
@@ -233,7 +233,7 @@ namespace webNews.Domain.Repositories.RoleManage
                         var permissionId = Convert.ToInt32(arrFuncAndPer[1]);
                         roles = new Security_RoleFunctionPermision
                         {
-                            RoleId = Convert.ToInt32(role.Id),
+                            RoleId = role.Id,
                             PermissionId = permissionId,
                             FunctionId = functionId
                         };

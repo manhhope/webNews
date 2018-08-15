@@ -9,6 +9,7 @@ using webNews.Domain.Services.RoleManage;
 using NLog;
 using webNews.Security;
 using webNews.Domain.Entities;
+using static webNews.FilterConfig;
 
 namespace webNews.Areas.Admin.Controllers
 {
@@ -25,6 +26,7 @@ namespace webNews.Areas.Admin.Controllers
         #endregion
 
         #region trang index
+        [GZipOrDeflate]
         public ActionResult Index()
         {
             if (!CheckAuthorizer.IsAuthenticated())
