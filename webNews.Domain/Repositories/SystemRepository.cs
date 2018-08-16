@@ -22,6 +22,148 @@ namespace webNews.Domain.Repositories
             _connectionFactory = connectionFactory;
         }
 
+        public HomePageInfo GetPageInfo()
+        {
+            var pageInfo = new HomePageInfo();
+
+            using (var db = _connectionFactory.Open())
+            {
+                var query = db.From<System_Menu>();
+                query = query.Where(x => x.ShowMenu == true && x.Area == "FE" && x.MenuLevel == 1)
+                            .OrderBy(x => x.MenuOrder);
+
+                pageInfo.Menus = db.Select(query);
+
+                var medias = db.Select<Medium>();
+
+                pageInfo.Branches = medias.Where(x => x.MediaType == Medium.TYPE_BRANCH).Select(x => new BasicInfo {
+                    Content = x.Content,
+                    ImageUrl = x.Source,
+                    Href = x.Slug,
+                    TargetUrl = x.Slug,
+                    Title = x.Content
+                }).ToList();
+
+                pageInfo.Banners = medias.Where(x => x.MediaType == Medium.TYPE_BANNER).Select(x => new BasicInfo
+                {
+                    Content = x.Content,
+                    ImageUrl = x.Source,
+                    Href = x.Slug,
+                    TargetUrl = x.Slug,
+                    Title = x.Content
+                }).ToList();
+
+                var logo = medias.Where(x => x.MediaType == Medium.TYPE_LOGO).Select(x => new BasicInfo
+                {
+                    Content = x.Content,
+                    ImageUrl = x.Source,
+                    Href = x.Slug,
+                    TargetUrl = x.Slug,
+                    Title = x.Content
+                }).FirstOrDefault();
+
+                pageInfo.Logo = logo != null ? logo.ImageUrl : HomePageInfo.LOGO_DEFAULT;
+                
+            }
+
+            return pageInfo;
+        }
+
+
+        public List<News> GetNews(int categoryId = -1)
+        {
+            try
+            {
+                using (var db = _connectionFactory.Open())
+                {
+                    var query = db.From<News>();
+                    query = query.Where(x => x.Status == 1);
+
+                    if (categoryId != -1)
+                    {
+                        query = query.Where(x => x.CategoryId == categoryId);
+                    }
+
+                    return db.Select(query);
+
+                }
+            }
+            catch(Exception ex)
+            {
+                _logger.Info("Get news error", ex, ex.Message, ex.StackTrace);
+
+                return null;
+            }
+        }
+
+        public List<NewsCategory> GetNewCategories()
+        {
+            try
+            {
+                using (var db = _connectionFactory.Open())
+                {
+                    var query = db.From<NewsCategory>();
+                    query = query.Where(x => x.Status == 1);
+                    
+                    return db.Select(query);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.Info("Get news category error", ex, ex.Message, ex.StackTrace);
+
+                return null;
+            }
+        }
+
+        public List<ProjectCategory> GetProjectCategories()
+        {
+            try
+            {
+                using (var db = _connectionFactory.Open())
+                {
+                    var query = db.From<ProjectCategory>();
+                    query = query.Where(x => x.Status == 1);
+
+                    return db.Select(query);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.Info("Get projects category error", ex, ex.Message, ex.StackTrace);
+
+                return null;
+            }
+        }
+
+        public List<Project> GetProjects(int categoryId = -1)
+        {
+            try
+            {
+                using (var db = _connectionFactory.Open())
+                {
+                    var query = db.From<Project>();
+                    query = query.Where(x => x.Status == 1);
+
+                    if (categoryId != -1)
+                    {
+                        query = query.Where(x => x.CategoryId == categoryId);
+                    }
+
+                    return db.Select(query);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.Info("Get projects error", ex, ex.Message, ex.StackTrace);
+
+                return null;
+            }
+        }
+
         public List<System_Menu> GetMenu()
         {
             using(var db = _connectionFactory.Open())
@@ -262,5 +404,6 @@ namespace webNews.Domain.Repositories
                 return null;
             }
         }
+
     }
 }

@@ -18,10 +18,11 @@ namespace webNews.Domain.Entities
     public partial class System_Menu : IHasId<int> 
     {
         [Alias("MenuId")]
-        [Required]
+        [AutoIncrement]
         public int Id { get; set; }
         public int? ParentId { get; set; }
         public string Controller { get; set; }
+        public string Slug { get; set; }
         public string AliasUrl { get; set; }
         public int? Permission { get; set; }
         public string Text { get; set; }
@@ -31,6 +32,8 @@ namespace webNews.Domain.Entities
         public string Description { get; set; }
         public bool? ShowMenu { get; set; }
         public string Area { get; set; }
+        public string Lang { get; set; }
+        public int? PageId { get; set; }
     }
 
 }

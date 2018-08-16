@@ -1,0 +1,35 @@
+﻿@using webNews.Models
+@{
+    HomePageInfo pageInfo = new HomePageInfo();
+    if (Page.info != null)
+    {
+        pageInfo = Page.info as HomePageInfo;
+    }
+}
+
+<div class="bg_banner">
+    <div class="w-body-l">
+        <div class="bannerFade">
+            <ul class="list-item">
+                @{
+                    for (var i = 1; i < pageInfo.Banners.Count; i++)
+                    {
+                        <li class="banner-item-@i">
+                            <a href="@pageInfo.Banners[i].TargetUrl" target="_blank" title="@pageInfo.Banners[i].Title">
+                                <img src="@pageInfo.Banners[i].ImageUrl" alt="@pageInfo.Banners[i].Title" />
+                            </a>
+                        </li>
+                    }
+                }
+
+                <li class="banner-item-9999">
+                    <a href="#" target="_blank" title="Test">
+                        <img src="~/ThemeFE/Images/Banner/flc-twin-towers-428201674812am.jpg" alt="Test" />
+                    </a>
+                </li>
+            </ul>
+            <div class="nav">
+            </div>
+        </div>
+    </div>
+</div>

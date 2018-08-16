@@ -10,7 +10,12 @@ namespace webNews.Domain.Repositories
 {
     public interface ISystemRepository
     {
+        HomePageInfo GetPageInfo();
         List<System_Menu> GetMenu();
+        List<News> GetNews(int categoryId = -1);
+        List<NewsCategory> GetNewCategories();
+        List<ProjectCategory> GetProjectCategories();
+        List<Project> GetProjects(int categoryId = -1);
         List<System_Menu> GetMenuUser();
         List<Security_Function> GetListFunctions();
         List<Security_Permission> GetListSecurity_Permission();

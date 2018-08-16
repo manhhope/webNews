@@ -1,0 +1,21 @@
+User-agent: *
+Allow: /
+Disallow: /ajax/
+Disallow: /ocm/
+Disallow: /ad/
+Disallow: /Tools/
+Disallow: /webservices/
+Disallow: /crondaemon/
+Sitemap: http://www.flc.vn/sitemap.xml
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+user-agent: rogerbot
+Disallow: /
+
+User-agent: BacklinkCrawler
+Disallow: /

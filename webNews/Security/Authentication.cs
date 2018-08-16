@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web;
 using System.Web.SessionState;
+using webNews.Domain;
 using webNews.Domain.Entities;
 using static System.String;
 
@@ -12,6 +13,64 @@ namespace webNews.Security
         public static void ClearAllSession()
         {
         }
+
+        public static HomePageInfo GetHomePageInfo()
+        {
+            var defaultInfo = new HomePageInfo
+            {
+                Branches = new List<BasicInfo>()
+            };
+
+            if (HttpContext.Current == null) return defaultInfo;
+
+            if (HttpContext.Current.Session["###HOME_PAGE_INFO###"] == null)
+            {
+                //defaultInfo = 
+
+                HttpContext.Current.Session["###HOME_PAGE_INFO###"] = defaultInfo;
+            }
+
+            return HttpContext.Current.Session["###HOME_PAGE_INFO###"] as HomePageInfo;
+        }
+
+        public static string BuildMenuFE(List<MenuFE> menus)
+        {
+            var menuString = "";
+
+            foreach(MenuFE menu in menus)
+            {
+                menuString += "<li>";
+                if(menu.Slug == "trang-chu")
+                    menuString += $"<a class=\"active\" title=\"{menu.Name}\" href=\"{menu.Slug}\">{menu.Name}</a>";
+                menuString += $"<a href=\"{menu.Slug}\">{menu.Name}</a>";
+
+                //Check menu has childs
+                if (menu.MenuChilds != null && menu.MenuChilds.Count > 0)
+                    menuString += $"<ul>{BuildMenuFE(menu.MenuChilds)}</ul>";
+
+                menuString += "</li>";
+            }
+
+            return menuString;
+        }
+
+        public static void MarkMenuFE(List<MenuFE> menus)
+        {
+            HttpContext.Current.Session["###MENU_FE###"] = BuildMenuFE(menus);
+        }
+
+        public static string GetMenuFE()
+        {
+            if (HttpContext.Current == null) return string.Empty;
+
+            if (HttpContext.Current.Session["###MENU_FE###"] == null)
+            {
+                HttpContext.Current.Session["###MENU_FE###"] = string.Empty;
+            }
+
+            return HttpContext.Current.Session["###MENU_FE###"].ToString();
+        }
+
         public static bool Authenticate(string username, string password)
         {
             HttpContext.Current.Session.Timeout = 600;
@@ -38,18 +97,12 @@ namespace webNews.Security
             manager.SaveSessionID(HttpContext.Current, newId, out isRedirected, out isAdded);
             return true;
         }
+
         public static string GetMenu()
         {
             if (HttpContext.Current == null) return string.Empty;
             if (HttpContext.Current.Session["###Menu###"] == null) return string.Empty;
             return HttpContext.Current.Session["###Menu###"].ToString();
-
-        }
-        public static string GetMenuUser()
-        {
-            if (HttpContext.Current == null) return string.Empty;
-            if (HttpContext.Current.Session["###MenuUser###"] == null) return string.Empty;
-            return HttpContext.Current.Session["###MenuUser###"].ToString();
 
         }
         public static void MarkLanguage(string language)
@@ -78,12 +131,6 @@ namespace webNews.Security
         {
             var menu = menus.Where(p => (p.ParentId ?? 0) == 0).OrderBy(p => p.MenuOrder).ToList().Aggregate("", (current, item) => current + BuildMenu(item, menus));
             HttpContext.Current.Session["###Menu###"] = menu;
-
-        }
-        public static void MarkMenuUser(List<System_Menu> menus)
-        {
-            var menu = menus.Where(p => (p.ParentId ?? 0) == 0).OrderBy(p => p.MenuOrder).ToList().Aggregate("", (current, item) => current + BuildMenu(item, menus));
-            HttpContext.Current.Session["###MenuUser###"] = menu;
 
         }
         public static List<Security_VwRoleService> GetPermission()

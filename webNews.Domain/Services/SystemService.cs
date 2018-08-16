@@ -54,6 +54,35 @@ namespace webNews.Domain.Services
         {
             return _systemRepository.Paging(list, pageIndex, pageSize);
         }
-       
+
+        public HomePageInfo GetPageInfo()
+        {
+            return _systemRepository.GetPageInfo();
+        }
+
+        public List<System_Menu> GetMenu()
+        {
+            return _systemRepository.GetMenu();
+        }
+
+        public List<News> GetNews(int categoryId = -1)
+        {
+            return _systemRepository.GetNews(categoryId);
+        }
+
+        public List<NewsCategory> GetNewCategories()
+        {
+            return _systemRepository.GetNewCategories();
+        }
+
+        public List<ProjectCategory> GetProjectCategories()
+        {
+            return _systemRepository.GetProjectCategories();
+        }
+
+        public List<Project> GetProjects(int categoryId = -1)
+        {
+            return _systemRepository.GetProjects(categoryId = 1);
+        }
     }
 }

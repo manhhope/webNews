@@ -22,7 +22,7 @@ namespace webNews.Domain.Entities
         public int Id { get; set; }
         public string Title { get; set; }
         [Required]
-        public int Type { get; set; }
+        public string MediaType { get; set; }
         public string Source { get; set; }
         public string ContentDetail { get; set; }
         public string Content { get; set; }

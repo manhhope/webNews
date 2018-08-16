@@ -92,6 +92,21 @@ namespace webNews
                "~/Scripts/Admin/RoleManagement/RoleManagement.js"
                ));
 
+
+
+            bundles.Add(new StyleBundle("~/Theme-fe/css").Include(
+                      "~/ThemeFE/Content/themes/skin/home.css",
+                      "~/ThemeFE/Scripts/Plugin/jquery.fancybox-1.3.4/fancybox/jquery.fancybox-1.3.4.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/theme-fe").Include(
+               "~/ThemeFE/Scripts/jquery-1.8.0.min.js",
+               "~/ThemeFE/Scripts/Plugin/Cycle/jquery.cycle.all.js",
+               "~/ThemeFE/Scripts/Plugin/jcarousellite/jcarousellite_1.0.1.min.js",
+               "~/ThemeFE/Scripts/Plugin/simplyscroll/jquery.simplyscroll-1.0.4.min.js",
+               "~/ThemeFE/Scripts/Plugin/jquery.fancybox-1.3.4/fancybox/jquery.fancybox-1.3.4.js",
+               "~/ThemeFE/Scripts/Core/demo.js"
+               ));
+
             BundleTable.EnableOptimizations = true;
         }
     }
