@@ -55,9 +55,9 @@ namespace webNews.Domain.Services
             return _systemRepository.Paging(list, pageIndex, pageSize);
         }
 
-        public HomePageInfo GetPageInfo()
+        public HomePageInfo GetPageInfo(Filter filter)
         {
-            return _systemRepository.GetPageInfo();
+            return _systemRepository.GetPageInfo(filter);
         }
 
         public List<System_Menu> GetMenu()
@@ -65,24 +65,24 @@ namespace webNews.Domain.Services
             return _systemRepository.GetMenu();
         }
 
-        public List<News> GetNews(int categoryId = -1)
+        public PagingObject<News> GetNews(Filter filter)
         {
-            return _systemRepository.GetNews(categoryId);
+            return _systemRepository.GetNews(filter);
         }
 
-        public List<NewsCategory> GetNewCategories()
+        public List<NewsCategory> GetNewCategories(Filter filter)
         {
-            return _systemRepository.GetNewCategories();
+            return _systemRepository.GetNewCategories(filter);
         }
 
-        public List<ProjectCategory> GetProjectCategories()
+        public List<ProjectCategory> GetProjectCategories(Filter filter)
         {
-            return _systemRepository.GetProjectCategories();
+            return _systemRepository.GetProjectCategories(filter);
         }
 
-        public List<Project> GetProjects(int categoryId = -1)
+        public PagingObject<Project> GetProjects(Filter filter)
         {
-            return _systemRepository.GetProjects(categoryId = 1);
+            return _systemRepository.GetProjects(filter);
         }
     }
 }

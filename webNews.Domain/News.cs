@@ -41,6 +41,7 @@ namespace webNews.Domain.Entities
         public DateTime? UpdatedDate { get; set; }
         public string UpdatedBy { get; set; }
         public int? UpdatedById { get; set; }
+        public string Lang { get; set; }
     }
 
 }

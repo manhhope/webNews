@@ -10,6 +10,7 @@ using webNews.Language.Language;
 using webNews.Models.Common;
 using NLog;
 using webNews.Security;
+using webNews.Domain.Services;
 
 namespace webNews.Controllers
 {
@@ -22,6 +23,24 @@ namespace webNews.Controllers
         public static string DateFormat = "dd/MM/yyyy";
         public static string DateTimeFormat = "dd/MM/yyyy HH:mm:ss";
         #endregion
+
+        private readonly ISystemService _systemService;
+
+        public BaseController(ISystemService systemService)
+        {
+            _systemService = systemService;
+
+            if(Authentication.GetHomePageInfo() == null)
+            {
+                var homePageInfo = _systemService.GetPageInfo(new Models.Filter { Lang = Authentication.GetLanguageCode() });
+                Authentication.MarkHomePageInfo(homePageInfo);
+            }
+        }
+
+        public int PageLength
+        {
+            get { return int.Parse(ConfigurationManager.AppSettings["pageLength"] ?? "5"); }
+        }
 
         public string BranchCode
         {

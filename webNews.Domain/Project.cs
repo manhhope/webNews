@@ -22,7 +22,9 @@ namespace webNews.Domain.Entities
         public int Id { get; set; }
         public int? CategoryId { get; set; }
         public string Name { get; set; }
+        public string Slug { get; set; }
         public string Info { get; set; }
+        public string ShortDescription { get; set; }
         public string Description { get; set; }
         public int? Order { get; set; }
         public string Tags { get; set; }
@@ -35,6 +37,7 @@ namespace webNews.Domain.Entities
         public DateTime? UpdatedDate { get; set; }
         public string UpdatedBy { get; set; }
         public int? UpdatedById { get; set; }
+        public string Lang { get; set; }
     }
 
 }

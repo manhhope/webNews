@@ -22,14 +22,15 @@ namespace webNews.Domain.Repositories
             _connectionFactory = connectionFactory;
         }
 
-        public HomePageInfo GetPageInfo()
+        public HomePageInfo GetPageInfo(Filter filter)
         {
             var pageInfo = new HomePageInfo();
 
             using (var db = _connectionFactory.Open())
             {
                 var query = db.From<System_Menu>();
-                query = query.Where(x => x.ShowMenu == true && x.Area == "FE" && x.MenuLevel == 1)
+                query = query.Where(x => x.ShowMenu == true && x.Area == "FE" && x.MenuLevel == 1
+                                && (filter.Lang != "all" || x.Lang == filter.Lang))
                             .OrderBy(x => x.MenuOrder);
 
                 pageInfo.Menus = db.Select(query);
@@ -63,28 +64,36 @@ namespace webNews.Domain.Repositories
                 }).FirstOrDefault();
 
                 pageInfo.Logo = logo != null ? logo.ImageUrl : HomePageInfo.LOGO_DEFAULT;
-                
+
+                pageInfo.Options = db.Select<System_Option>().FirstOrDefault();
             }
 
             return pageInfo;
         }
 
 
-        public List<News> GetNews(int categoryId = -1)
+        public PagingObject<News> GetNews(Filter filter)
         {
+            var returnObj = new PagingObject<News>();
             try
             {
                 using (var db = _connectionFactory.Open())
                 {
                     var query = db.From<News>();
-                    query = query.Where(x => x.Status == 1);
+                    query = query.Where(x => x.Status == 1 && x.Type == filter.Type && (filter.Lang == "all" || x.Lang == filter.Lang));
 
-                    if (categoryId != -1)
+                    if (filter.CateId != 0)
                     {
-                        query = query.Where(x => x.CategoryId == categoryId);
+                        query = query.Where(x => x.CategoryId == filter.CateId);
                     }
 
-                    return db.Select(query);
+                    returnObj.Total = Convert.ToInt32(db.Count(query));
+                    query = query.Skip(filter.Page * filter.PageLength).Take(filter.PageLength);
+                    returnObj.DataList = db.Select(query);
+                    returnObj.CurrentPage = filter.Page;
+                    returnObj.PageSize = filter.PageLength;
+
+                    return returnObj;
 
                 }
             }
@@ -96,14 +105,14 @@ namespace webNews.Domain.Repositories
             }
         }
 
-        public List<NewsCategory> GetNewCategories()
+        public List<NewsCategory> GetNewCategories(Filter filter)
         {
             try
             {
                 using (var db = _connectionFactory.Open())
                 {
                     var query = db.From<NewsCategory>();
-                    query = query.Where(x => x.Status == 1);
+                    query = query.Where(x => x.Status == 1 && x.Type == filter.Type && (filter.Lang == "all" || x.Lang == filter.Lang));
                     
                     return db.Select(query);
 
@@ -117,14 +126,14 @@ namespace webNews.Domain.Repositories
             }
         }
 
-        public List<ProjectCategory> GetProjectCategories()
+        public List<ProjectCategory> GetProjectCategories(Filter filter)
         {
             try
             {
                 using (var db = _connectionFactory.Open())
                 {
                     var query = db.From<ProjectCategory>();
-                    query = query.Where(x => x.Status == 1);
+                    query = query.Where(x => x.Status == 1 && (filter.Lang != "all" || x.Lang == filter.Lang));
 
                     return db.Select(query);
 
@@ -138,21 +147,28 @@ namespace webNews.Domain.Repositories
             }
         }
 
-        public List<Project> GetProjects(int categoryId = -1)
+        public PagingObject<Project> GetProjects(Filter filter)
         {
+            var returnObj = new PagingObject<Project>();
             try
             {
                 using (var db = _connectionFactory.Open())
                 {
                     var query = db.From<Project>();
-                    query = query.Where(x => x.Status == 1);
+                    query = query.Where(x => x.Status == 1 && (filter.Lang == "all" || x.Lang == filter.Lang));
 
-                    if (categoryId != -1)
+                    if (filter.CateId != 0)
                     {
-                        query = query.Where(x => x.CategoryId == categoryId);
+                        query = query.Where(x => x.CategoryId == filter.CateId);
                     }
 
-                    return db.Select(query);
+                    returnObj.Total = Convert.ToInt32(db.Count(query));
+                    query = query.Skip(filter.Page * filter.PageLength).Take(filter.PageLength);
+                    returnObj.DataList = db.Select(query);
+                    returnObj.CurrentPage = filter.Page;
+                    returnObj.PageSize = filter.PageLength;
+
+                    return returnObj;
 
                 }
             }
@@ -257,7 +273,7 @@ namespace webNews.Domain.Repositories
             catch(Exception ex)
             {
                 _logger.Error("Security_Permission_Update fail: " + ex.Message);
-                return -1;
+                return 0;
             }
         }
 
@@ -330,7 +346,7 @@ namespace webNews.Domain.Repositories
                         pageIndex = 0;
                     else
                         pageIndex = (pageIndex / pageSize);
-                    if(pageIndex != -1 && pageSize != -1)
+                    if(pageIndex != 0 && pageSize != 0)
                     {
                         query.Skip(pageIndex * pageSize).Take(pageSize);
                     }
@@ -362,7 +378,7 @@ namespace webNews.Domain.Repositories
                         pageIndex = 0;
                     else
                         pageIndex = (pageIndex / pageSize);
-                    if(pageIndex != -1 && pageSize != -1)
+                    if(pageIndex != 0 && pageSize != 0)
                     {
                         query.Skip(pageIndex * pageSize).Take(pageSize);
                     }

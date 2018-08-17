@@ -1,4 +1,4 @@
-﻿@using webNews.Models
+﻿@using webNews.Domain
 @{
     HomePageInfo pageInfo = new HomePageInfo();
     if (Page.info != null)
@@ -12,13 +12,16 @@
         <div class="bannerFade">
             <ul class="list-item">
                 @{
-                    for (var i = 1; i < pageInfo.Banners.Count; i++)
+                    if (pageInfo.Banners != null)
                     {
-                        <li class="banner-item-@i">
-                            <a href="@pageInfo.Banners[i].TargetUrl" target="_blank" title="@pageInfo.Banners[i].Title">
-                                <img src="@pageInfo.Banners[i].ImageUrl" alt="@pageInfo.Banners[i].Title" />
-                            </a>
-                        </li>
+                        for (var i = 1; i < pageInfo.Banners.Count; i++)
+                        {
+                            <li class="banner-item-@i">
+                                <a href="@pageInfo.Banners[i].TargetUrl" target="_blank" title="@pageInfo.Banners[i].Title">
+                                    <img src="@pageInfo.Banners[i].ImageUrl" alt="@pageInfo.Banners[i].Title" />
+                                </a>
+                            </li>
+                        }
                     }
                 }
 

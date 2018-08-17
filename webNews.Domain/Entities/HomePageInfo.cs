@@ -14,6 +14,10 @@ namespace webNews.Domain
         public HomePageInfo()
         {
             this.Branches = new List<BasicInfo>();
+            this.Banners = new List<BasicInfo>();
+            this.Parters = new List<BasicInfo>();
+            this.Menus = new List<System_Menu>();
+            this.Options = new System_Option();
         }
 
         public string Logo { get; set; }
@@ -22,6 +26,8 @@ namespace webNews.Domain
         public List<BasicInfo> Banners { get; set; }
         public List<BasicInfo> Parters { get; set; }
         public List<System_Menu> Menus { get; set; }
+
+        public System_Option Options { get; set; }
     }
 
     public class BasicInfo

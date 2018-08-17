@@ -12,6 +12,7 @@ using webNews.Controllers;
 using webNews.Domain;
 using webNews.Shared;
 using webNews.Services.SecurityService;
+using webNews.Domain.Services;
 
 namespace webNews
 {
@@ -27,7 +28,7 @@ namespace webNews
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AutofacConfig.ConfigureContainer();
-
+            HomepageInfoConfig.GetPageInfo();
         }
 
         private readonly Logger _log = LogManager.GetLogger("ErrorAllPage");

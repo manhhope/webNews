@@ -79,6 +79,9 @@
     <Compile Include="Entities\HomePageInfo.cs" />
     <Compile Include="Entities\Medium.cs" />
     <Compile Include="Entities\MenuFE.cs" />
+    <Compile Include="Entities\News.cs" />
+    <Compile Include="Entities\ProjectCategory.cs" />
+    <Compile Include="Entities\NewsCategory.cs" />
     <Compile Include="Language.cs">
       <DependentUpon>OrmLite.Poco.tt</DependentUpon>
     </Compile>
@@ -155,6 +158,9 @@
       <DependentUpon>OrmLite.Poco.tt</DependentUpon>
     </Compile>
     <Compile Include="System_Menu.cs">
+      <DependentUpon>OrmLite.Poco.tt</DependentUpon>
+    </Compile>
+    <Compile Include="System_Option.cs">
       <DependentUpon>OrmLite.Poco.tt</DependentUpon>
     </Compile>
     <Compile Include="System_User.cs">
