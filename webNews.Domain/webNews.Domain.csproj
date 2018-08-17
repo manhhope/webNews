@@ -148,9 +148,6 @@
     <Compile Include="Services\RoleManage\RoleManageService.cs" />
     <Compile Include="Services\Service.cs" />
     <Compile Include="Services\SystemService.cs" />
-    <Compile Include="sysdiagrams.cs">
-      <DependentUpon>OrmLite.Poco.tt</DependentUpon>
-    </Compile>
     <Compile Include="System_Menu.cs">
       <DependentUpon>OrmLite.Poco.tt</DependentUpon>
     </Compile>
