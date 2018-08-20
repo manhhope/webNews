@@ -31,42 +31,122 @@ namespace webNews.Security
             cache.Insert("###HOME_PAGE_INFO###", homePageInfo);
         }
 
-        public static string BuildMenuFE(List<MenuFE> menus)
+
+        public static List<Medium> GetPartners()
         {
-            var menuString = "";
+            var cache = new Cache();
+            List<Medium> defaultInfo = null;
 
-            foreach(MenuFE menu in menus)
-            {
-                menuString += "<li>";
-                if(menu.Slug == "trang-chu")
-                    menuString += $"<a class=\"active\" title=\"{menu.Name}\" href=\"{menu.Slug}\">{menu.Name}</a>";
-                menuString += $"<a href=\"{menu.Slug}\">{menu.Name}</a>";
+            if (cache.Get("###PARTNERS_INFO###") == null) return defaultInfo;
 
-                //Check menu has childs
-                if (menu.MenuChilds != null && menu.MenuChilds.Count > 0)
-                    menuString += $"<ul>{BuildMenuFE(menu.MenuChilds)}</ul>";
-
-                menuString += "</li>";
-            }
-
-            return menuString;
+            return cache.Get("###PARTNERS_INFO###") as List<Medium>;
         }
 
-        public static void MarkMenuFE(List<MenuFE> menus)
+        public static void MarkPartners(List<Medium> partnersInfo)
         {
-            HttpContext.Current.Session["###MENU_FE###"] = BuildMenuFE(menus);
+            var cache = new Cache();
+            cache.Insert("###PARTNERS_INFO###", partnersInfo);
+        }
+
+
+        public static List<Medium> GetBanners()
+        {
+            var cache = new Cache();
+            List<Medium> defaultInfo = null;
+
+            if (cache.Get("###BANNERS_INFO###") == null) return defaultInfo;
+
+            return cache.Get("###BANNERS_INFO###") as List<Medium>;
+        }
+
+        public static void MarkBanners(List<Medium> banners)
+        {
+            var cache = new Cache();
+            cache.Insert("###BANNERS_INFO###", banners);
+        }
+        public static List<Medium> GetBranches()
+        {
+            var cache = new Cache();
+            List<Medium> defaultInfo = null;
+
+            if (cache.Get("###BRANCHES_INFO###") == null) return defaultInfo;
+
+            return cache.Get("###BRANCHES_INFO###") as List<Medium>;
+        }
+
+        public static void MarkBranches(List<Medium> banners)
+        {
+            var cache = new Cache();
+            cache.Insert("###BRANCHES_INFO###", banners);
+        }
+        public static List<Medium> GetLogo()
+        {
+            var cache = new Cache();
+            List<Medium> defaultInfo = null;
+
+            if (cache.Get("###LOGO_INFO###") == null) return defaultInfo;
+
+            return cache.Get("###LOGO_INFO###") as List<Medium>;
+        }
+
+        public static void MarkLogo(List<Medium> logo)
+        {
+            var cache = new Cache();
+            cache.Insert("###LOGO_INFO###", logo);
+        }
+
+        public static string BuildMenuFE(System_Menu item, List<System_Menu> menus, string lang = "vi")
+        {
+            var menu = "";
+            var listChild = menus.Where(p => p.ParentId == item.Id && (p.Lang == null || p.Lang == lang)).OrderBy(p => p.MenuOrder);
+
+            if (listChild.Any())
+            {
+                menu += "<li> " +
+                    $"<a href=\"{item.Slug}\">{item.Text.ToUpper()}</a>";
+                if (item.MenuLevel != null)
+                    menu += "<ul>";
+                menu = listChild.Aggregate(menu, (current, submenu) => current + BuildMenuFE(submenu, menus, lang));
+                menu += "</ul></li>";
+            }
+            else
+            {
+                if (item.Area == "FE" || item.Area == "")
+                {
+                    menu += $"<li><a title=\"{item.Text}\" href=\"{item.Slug}\">{item.Text.ToUpper()}</a></li>";
+                }
+                else
+                {
+                    menu += $"<li><a title=\"{item.Text}\" href=\"{item.Slug}\">{item.Text.ToUpper()}</a></li>";
+                }
+            }
+            
+
+            return menu;
+        }
+
+        public static void MarkMenuFE(List<System_Menu> menus)
+        {
+            var cache = new Cache();
+            var menuEN = menus.Where(p => (p.ParentId ?? 0) == 0 && p.Lang == "en").OrderBy(p => p.MenuOrder).ToList().Aggregate("", (current, item) => current + BuildMenuFE(item, menus, "en"));
+            var menuVI = menus.Where(p => (p.ParentId ?? 0) == 0 && p.Lang == "vi").OrderBy(p => p.MenuOrder).ToList().Aggregate("", (current, item) => current + BuildMenuFE(item, menus, "vi"));
+            cache.Insert("###MENU_FE_EN###", menuEN);
+            cache.Insert("###MENU_FE_VI###", menuVI);
         }
 
         public static string GetMenuFE()
         {
-            if (HttpContext.Current == null || HttpContext.Current.Session == null) return string.Empty;
-
-            if (HttpContext.Current.Session["###MENU_FE###"] == null)
+            var cache = new Cache();
+            if(GetLanguageCode() == "en" && cache.Get("###MENU_FE_EN###") != null)
             {
-                HttpContext.Current.Session["###MENU_FE###"] = string.Empty;
+                return cache.Get("###MENU_FE_EN###").ToString();
             }
+            else if(GetLanguageCode() == "vi" && cache.Get("###MENU_FE_VI###") != null)
+            {
 
-            return HttpContext.Current.Session["###MENU_FE###"].ToString();
+                return cache.Get("###MENU_FE_VI###").ToString();
+            }
+            return "";
         }
 
         public static bool Authenticate(string username, string password)

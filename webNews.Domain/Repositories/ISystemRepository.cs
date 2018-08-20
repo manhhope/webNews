@@ -11,7 +11,10 @@ namespace webNews.Domain.Repositories
     public interface ISystemRepository
     {
         HomePageInfo GetPageInfo(Filter filter);
+        List<Medium> GetMedias(Filter filter);
         List<System_Menu> GetMenu();
+        List<System_Menu> GetMenu(string area);
+        News GetNews(int id, int type);
         PagingObject<News> GetNews(Filter filter);
         List<NewsCategory> GetNewCategories(Filter filter);
         List<ProjectCategory> GetProjectCategories(Filter filter);

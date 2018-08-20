@@ -5,24 +5,23 @@ using System.Web;
 using System.Web.Mvc;
 using webNews.Domain.Entities;
 using webNews.Domain.Services;
+using webNews.Models;
 using webNews.Security;
 
 namespace webNews.Controllers
 {
-    public class IntroductionController : Controller
+    public class ShareHolderController : Controller
     {
         private readonly ISystemService _systemService;
 
-        public IntroductionController(ISystemService systemService)
+        public ShareHolderController(ISystemService systemService)
         {
             _systemService = systemService;
         }
 
-        // GET: Introduction
+        // GET: ShareHolder
         public ActionResult Index()
         {
-            //if (!CheckAuthorizer.IsAuthenticated())
-            //    return RedirectToAction("Index", "Login", new { Area = "Admin" });
             var newsCategorieId = Convert.ToInt32(HttpContext.Request.Params.Get("cateId"));
             var page = Convert.ToInt32(HttpContext.Request.Params.Get("page"));
 
@@ -30,7 +29,7 @@ namespace webNews.Controllers
             {
                 Page = page - 1 < 0 ? 0 : page - 1,
                 CateId = newsCategorieId,
-                Type = News.TYPE_INTRODUCTION,
+                Type = News.TYPE_SHAREHOLDER,
                 Lang = Authentication.GetLanguageCode()
             };
 
@@ -40,14 +39,21 @@ namespace webNews.Controllers
             ViewBag.newsCategories = newsCategories;
             ViewBag.news = news;
 
+            if (null == newsCategories)
+                return RedirectToAction("Index", "Error");
+
+            if (newsCategorieId > 0)
+                return View("Category");
+
             return View();
         }
+
         public ActionResult Detail()
         {
 
             var newsId = Convert.ToInt32(HttpContext.Request.Params.Get("id"));
 
-            var news = _systemService.GetNews(newsId, News.TYPE_INTRODUCTION);
+            var news = _systemService.GetNews(newsId, News.TYPE_SHAREHOLDER);
 
             if (null == news)
                 return RedirectToAction("Error", "Index");

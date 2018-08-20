@@ -72,12 +72,12 @@ a
     width: 203px;
     height: 134px;
 }
-.w-header .w-header-l a
-{
+.w-header .w-header-l a {
     display: block;
     background: url("images/logo.png") no-repeat scroll 0 0 transparent;
     height: 134px;
     width: 203px;
+    margin-top: 28px;
 }
 .w-header .w-header-r
 {
@@ -442,7 +442,7 @@ a.viewmore
     position: absolute;
     top: 320px;
     left: 703px;
-    z-index: 10;
+    z-index: 20;
 }
 .nav a
 {
@@ -470,7 +470,7 @@ a.viewmore
     position: absolute;
     top: 208px;
     left: 20px;
-    z-index: 10;
+    z-index: 20;
 }
 
 .news_event .listarticle
@@ -796,13 +796,13 @@ a.viewmore
     padding: 18px 0 30px;
     display: none;
 }
-.detail .fullcontent
-{
+.detail .fullcontent {
     font-size: 14px;
     line-height: 21px;
     color: #4C4C4C;
     text-align: justify;
     margin: 0 0 20px;
+    padding-top: 20px;
 }
 .Tag
 {
@@ -1741,7 +1741,7 @@ Vertical scroller example, with custom base class */
 }
 
 .nextprev {
-	display:inline-block; position:absolute; left:158px; bottom:0; z-index:10;
+	display:inline-block; position:absolute; left:158px; bottom:0; z-index:20;
 }
 .nextprev a {
 	width:45px; height:45px; float:left; display:inline;

@@ -182,10 +182,19 @@ namespace webNews.Domain.Repositories
 
         public List<System_Menu> GetMenu()
         {
-            using(var db = _connectionFactory.Open())
+            using (var db = _connectionFactory.Open())
             {
                 var query = db.From<System_Menu>();
                 query = query.Where(x => x.ShowMenu == true && x.Area == "Admin");
+                return db.Select(query);
+            }
+        }
+        public List<System_Menu> GetMenu(string area)
+        {
+            using (var db = _connectionFactory.Open())
+            {
+                var query = db.From<System_Menu>();
+                query = query.Where(x => x.ShowMenu == true && x.Area == area);
                 return db.Select(query);
             }
         }
@@ -421,5 +430,54 @@ namespace webNews.Domain.Repositories
             }
         }
 
+        public List<Medium> GetMedias(Filter filter)
+        {
+            try
+            {
+                using (var db = _connectionFactory.Open())
+                {
+                    var query = db.From<Medium>();
+                    query = query.Where(x => x.Status == 1 && x.MediaType == filter.ExtraInfo && (filter.Lang == "all" || x.Lang == filter.Lang));
+
+                    return db.Select(query);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.Info("Get medias error", ex, ex.Message, ex.StackTrace);
+
+                return null;
+            }
+        }
+
+        public News GetNews(int id, int type)
+        {
+            try
+            {
+                using (var db = _connectionFactory.Open())
+                {
+                    var news = db.Select<News>(x => x.Id == id && x.Type == type).FirstOrDefault();
+
+                    if(null != news)
+                    {
+                        news.Categories = db.Select<NewsCategory>(x => x.Type == news.Type && x.Lang == news.Lang);
+                        var query = db.From<News>()
+                            .Where(x => x.CategoryId == news.CategoryId && x.Lang == news.Lang)
+                            .OrderByDescending(x => x.CreatedDate).Take(10);
+                        news.RelateNews = db.Select(query);
+                    }
+
+                    return news;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.Info("Get medias error", ex, ex.Message, ex.StackTrace);
+
+                return null;
+            }
+        }
     }
 }

@@ -1,0 +1,108 @@
+﻿@{
+    ViewBag.Title = Model.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using webNews.Domain.Entities;
+@using System.Globalization;
+@using webNews.Security;
+@model webNews.Domain.Entities.News
+
+<script src="~/ThemeFE/Scripts/Plugin/Pagging/pagging.js"></script>
+<div id="content">
+    <div id="leftcontent">
+        <div class="webpartcontent">
+            <!-- Chi tiết tin -->
+            <div class="articledetail">
+                <div class="jPrint">
+                    <div class="detail">
+                        <div class="wraptitle">
+                            <img src="@Model.Image" alt="@Model.Title">
+                            <div class="bg_opacity">
+                                <h3 class="title">@Model.Title</h3>
+                                <span class="date">
+                                    @(Model.CreatedDate != null ? Model.CreatedDate.Value.ToString("dddd, dd/MM/yyyy, HH:mm", Authentication.GetLanguageCode() == "vi" ?
+                                         new CultureInfo("vi-VN") : new CultureInfo("en-US")) : "")
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="fullcontent">
+                            @Html.Raw(Model.Content)
+                        </div>
+                        @RenderPage("../Shared/_LikePartial.cshtml")
+
+                    </div>
+                </div>
+                <div class="clear">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="rightcontent">
+        <div class="webpartcontent">
+            <h2>
+                Tin tức - sự kiện
+            </h2>
+            <div class="menuleft">
+                <ul class="lt nic-treeview">
+                    @{
+                        var newsCategories = Model.Categories as List<NewsCategory>;
+                        if (newsCategories != null)
+                        {
+                            foreach (var category in newsCategories)
+                            {
+                                <li class="item item-0">
+                                    <a class="a-item-0" href="@category.Slug" title="@category.Title">@category.Title</a>
+                                    @if (category.CategoryChilds != null && category.CategoryChilds.Count > 0)
+                                    {
+                                        <ul class="lt">
+                                            @foreach (var child in category.CategoryChilds)
+                                            {
+                                                <li class="item item-1">
+                                                    <a class="a-item-1" href="@child.Slug" title="@child.Title">@child.Title</a>
+                                                </li>
+                                            }
+                                        </ul>
+                                    }
+                                </li>
+                            }
+                        }
+
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="webpartcontent">
+            <h2>
+                Các tin khác
+            </h2>
+            <!-- Các tin khác -->
+            <div class="articlecontinue">
+                <ul class="list-item">
+                    @{
+                        var newsList = Model.RelateNews as List<News>;
+                        if (newsList != null)
+                        {
+                            foreach (var news in newsList)
+                            {
+                                <li class="item">
+                                    <a href="@news.Slug" title="@news.Title">
+                                        @news.Title
+                                    </a>
+                                </li>
+                            }
+                        }
+
+                    }
+                    
+                </ul>
+
+                <a href="/news" class="viewmore">Xem thêm</a>
+            </div>
+        </div>
+        @RenderPage("../Shared/_ImageGalleryPartial.cshtml")
+        @RenderPage("../Shared/_VideoGalleryPartial.cshtml")
+    </div>
+    <div class="clear">
+    </div>
+</div>
