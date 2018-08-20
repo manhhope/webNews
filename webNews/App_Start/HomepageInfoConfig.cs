@@ -47,7 +47,17 @@ namespace webNews
             if (Authentication.GetHomePageInfo() == null)
             {
                 var homePageInfo = _systemRepository.GetPageInfo(new Models.Filter { Lang = Authentication.GetLanguageCode() });
+                var partners = _systemRepository.GetMedias(new Models.Filter { ExtraInfo = Domain.Entities.Medium.TYPE_PARTER ,Lang = "all" });
+                var banners = _systemRepository.GetMedias(new Models.Filter { ExtraInfo = Domain.Entities.Medium.TYPE_BANNER, Lang = "all" });
+                var branches = _systemRepository.GetMedias(new Models.Filter { ExtraInfo = Domain.Entities.Medium.TYPE_BRANCH, Lang = "all" });
+                var logo = _systemRepository.GetMedias(new Models.Filter { ExtraInfo = Domain.Entities.Medium.TYPE_LOGO, Lang = "all" });
+                var menus = _systemRepository.GetMenu("FE");
                 Authentication.MarkHomePageInfo(homePageInfo);
+                Authentication.MarkPartners(partners);
+                Authentication.MarkBanners(banners);
+                Authentication.MarkBranches(branches);
+                Authentication.MarkLogo(logo);
+                Authentication.MarkMenuFE(menus);
             }
         }
     }

@@ -79,8 +79,8 @@
                         {
                             foreach (var category in projectCategories)
                             {
-                                <li class="active item item-0">
-                                    <a class="active a-item-0" href="@category.Slug" title="@category.Name">@category.Name</a>
+                                <li class="item item-0">
+                                    <a class="a-item-0" href="@category.Slug" title="@category.Name">@category.Name</a>
                                     @if (category.CategoryChilds != null && category.CategoryChilds.Count > 0)
                                     {
                                         <ul class="lt">

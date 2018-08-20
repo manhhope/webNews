@@ -84,5 +84,15 @@ namespace webNews.Domain.Services
         {
             return _systemRepository.GetProjects(filter);
         }
+
+        public List<Medium> GetMedias(Filter filter)
+        {
+            return _systemRepository.GetMedias(filter);
+        }
+
+        public News GetNews(int id, int type)
+        {
+            return _systemRepository.GetNews(id, type);
+        }
     }
 }

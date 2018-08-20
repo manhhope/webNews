@@ -82,8 +82,8 @@
                         {
                             foreach (var category in newsCategories)
                             {
-                                <li class="active item item-0">
-                                    <a class="active a-item-0" href="@category.Slug" title="@category.Title">@category.Title</a>
+                                <li class="item item-0">
+                                    <a class="a-item-0" href="@category.Slug" title="@category.Title">@category.Title</a>
                                     @if (category.CategoryChilds != null && category.CategoryChilds.Count > 0)
                                     {
                                         <ul class="lt">

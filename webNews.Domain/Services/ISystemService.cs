@@ -9,7 +9,9 @@ namespace webNews.Domain.Services
     public interface ISystemService
     {
         HomePageInfo GetPageInfo(Filter filter);
+        List<Medium> GetMedias(Filter filter);
         List<System_Menu> GetMenu();
+        News GetNews(int id, int type);
         PagingObject<News> GetNews(Filter filter);
         List<NewsCategory> GetNewCategories(Filter filter);
         List<ProjectCategory> GetProjectCategories(Filter filter);

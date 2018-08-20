@@ -38,6 +38,7 @@ namespace webNews.Domain.Entities
         public int? UpdatedById { get; set; }
         public string Lang { get; set; }
         public int? Type { get; set; }
+        public string ExtraInfo { get; set; }
     }
 
 }

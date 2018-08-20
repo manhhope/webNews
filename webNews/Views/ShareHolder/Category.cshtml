@@ -29,15 +29,7 @@
                                         <img src="@news.Image" alt="@news.Title" />
                                     </a>
                                     <h3 class="title">
-                                        @{ 
-                                            var namePost = news.Slug;
-                                            if(string.IsNullOrEmpty(namePost))
-                                            {
-                                                namePost = webNews.Shared.UrlUtil.ToFriendlyUrl(news.Title);
-                                            }
-                                        }
-                                        
-                                        <a href="@Url.RouteUrl("NewsDetail", new { category_name = "tin-tuc", post_name = namePost, id = news.Id })" title="@news.Title">@news.Title</a>
+                                        <a href="@news.Slug" title="@news.Title">@news.Title</a>
                                     </h3>
                                     <p class="date">
                                         @(news.CreatedDate != null ? news.CreatedDate.Value.ToString("dddd, dd/MM/yyyy, HH:mm", Authentication.GetLanguageCode() == "vi" ?
@@ -90,27 +82,20 @@
                         {
                             foreach (var category in newsCategories)
                             {
-                    <li class="item item-0">
-                        @{
-                            var namePost = category.Slug;
-                            if (string.IsNullOrEmpty(namePost))
-                            {
-                                namePost = webNews.Shared.UrlUtil.ToFriendlyUrl(category.Title);
-                            }
-                        }
-                        <a class="a-item-0" href="@category.Slug" title="@category.Title">@category.Title</a>
-                        @if (category.CategoryChilds != null && category.CategoryChilds.Count > 0)
-                        {
-                            <ul class="lt">
-                                @foreach (var child in category.CategoryChilds)
-                                {
-                                    <li class="item item-1">
-                                        <a class="a-item-1" href="@child.Slug" title="@child.Title">@child.Title</a>
-                                    </li>
-                                }
-                            </ul>
-                        }
-                    </li>
+                                <li class="item item-0">
+                                    <a class="a-item-0" href="@category.Slug" title="@category.Title">@category.Title</a>
+                                    @if (category.CategoryChilds != null && category.CategoryChilds.Count > 0)
+                                    {
+                                        <ul class="lt">
+                                            @foreach (var child in category.CategoryChilds)
+                                            {
+                                                <li class="item item-1">
+                                                    <a class="a-item-1" href="@child.Slug" title="@child.Title">@child.Title</a>
+                                                </li>
+                                            }
+                                        </ul>
+                                    }
+                                </li>
                             }
                         }
 

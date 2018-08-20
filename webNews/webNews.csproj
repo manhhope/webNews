@@ -210,6 +210,8 @@
     <Compile Include="Controllers\NewsDetailController.cs" />
     <Compile Include="Controllers\ProjectDetailController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
+    <Compile Include="Controllers\InvestmentController.cs" />
+    <Compile Include="Controllers\ShareHolderController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -2081,10 +2083,20 @@
     <Content Include="Views\Introduction\Index.cshtml" />
     <Content Include="Views\Contact\Index.cshtml" />
     <Content Include="Views\Projects\Index.cshtml" />
+    <Content Include="Views\ShareHolder\Index.cshtml" />
+    <Content Include="Views\Investment\Index.cshtml" />
+    <Content Include="Views\News\Detail.cshtml" />
+    <Content Include="Views\Shared\_LikePartial.cshtml" />
+    <Content Include="Views\Shared\_ImageGalleryPartial.cshtml" />
+    <Content Include="Views\Shared\_VideoGalleryPartial.cshtml" />
+    <Content Include="Views\Investment\Detail.cshtml" />
+    <Content Include="Views\Introduction\Detail.cshtml" />
+    <Content Include="Views\Recruitment\Detail.cshtml" />
+    <Content Include="Views\ShareHolder\Detail.cshtml" />
+    <Content Include="Views\ShareHolder\Category.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\NewsDetail\" />
     <Folder Include="Views\ProjectDetail\" />
   </ItemGroup>
   <ItemGroup>

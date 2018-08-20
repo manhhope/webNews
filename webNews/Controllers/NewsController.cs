@@ -10,7 +10,7 @@ using webNews.Security;
 
 namespace webNews.Controllers
 {
-    public class NewsController : BaseController
+    public class NewsController : Controller
     {
         private readonly ISystemService _systemService;
 
@@ -22,8 +22,6 @@ namespace webNews.Controllers
         // GET: News
         public ActionResult Index()
         {
-            //if (!CheckAuthorizer.IsAuthenticated())
-            //    return RedirectToAction("Index", "Login", new { Area = "Admin" });
             var newsCategorieId = Convert.ToInt32(HttpContext.Request.Params.Get("cateId"));
             var page = Convert.ToInt32(HttpContext.Request.Params.Get("page"));
 
@@ -42,6 +40,18 @@ namespace webNews.Controllers
             ViewBag.news = news;
 
             return View();
+        }
+        
+        public ActionResult Detail(int id)
+        {
+           
+
+            var news = _systemService.GetNews(id, News.TYPE_NEWS);
+
+            if(null == news)
+                return RedirectToAction("Error", "Index");
+
+            return View(news);
         }
     }
 }

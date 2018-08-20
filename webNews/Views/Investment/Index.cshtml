@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Giới thiệu";
+    ViewBag.Title = "Lĩnh vực đầu tư";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @using webNews.Domain.Entities;
@@ -10,73 +10,54 @@
     <div id="leftcontent">
         <div class="webpartcontent">
             <div class="articlelist">
-                <ul>
+                <ul class="linhvuchoatdong">
                     @{
-                        int totalRecord = 0;
-                        int currentPage = 0;
-                        int pageSize = 5;
-                        var newsPaging = ViewBag.news as webNews.Models.PagingObject<News>;
-                        if (newsPaging != null)
+                        string nomargin = "";
+                        int index = 0;
+                        var newsCategories = ViewBag.newsCategories as List<NewsCategory>;
+                        if (newsCategories != null)
                         {
-                            totalRecord = newsPaging.Total;
-                            currentPage = newsPaging.CurrentPage + 1;
-                            pageSize = newsPaging.PageSize;
-                            foreach (var news in newsPaging.DataList)
+                            foreach (var category in newsCategories)
                             {
-                                <li class="item">
-                                    <a class="avatar" href="@news.Slug" title="@news.Title">
-                                        <img src="@news.Image" alt="@news.Title" />
+                                index++;
+                                if (index % 2 == 1)
+                                {
+                                    nomargin = "nomargin";
+                                }
+                                else
+                                {
+                                    nomargin = "";
+                                }
+                                <li class="item @nomargin">
+                                    <a class="avatar" href="@category.Slug" title="@category.Title">
+                                        <img src="@category.Image" alt="@category.Title" />
                                     </a>
                                     <h3 class="title">
-                                        <a href="@news.Slug" title="@news.Title">@news.Title</a>
+                                        <a href="@category.Slug" title="@category.Title">@category.Title</a>
                                     </h3>
-                                    <p class="date">
-                                        @(news.CreatedDate != null ? news.CreatedDate.Value.ToString("dddd, dd/MM/yyyy, HH:mm", Authentication.GetLanguageCode() == "vi" ?
-                                        new CultureInfo("vi-VN") : new CultureInfo("en-US")) : "")
-                                    </p>
                                     <div class="des">
-                                        <p>
-                                            @news.ContentDetail
-                                        </p>
+                                        @*<p>
+                                @news.ContentDetail
+                            </p>*@
                                     </div>
                                 </li>
                             }
                         }
-
                     }
 
                 </ul>
-                <div class="clear">
-                </div>
-                <script src="../../Scripts/Plugin/Pagging/pagging.js" type="text/javascript"></script>
-                <script type="text/javascript">
-                    $(document).ready(function () {
-                        /* initiate plugin */
-                        $(".itemContainer").jPagging({
-                            container: ".itemContainer",
-                            links: "/news?page=",
-                            pageSize: @pageSize,
-                            currentNumPage: @currentPage,
-                            totalRecord: @totalRecord
-                        });
-                    });</script>
-                <div class="paging pagination pagination-news-list">
-                    <ul class="itemContainer"></ul>
-                    <div class="clear">
-                    </div>
-                </div>
+                    
             </div>
         </div>
     </div>
     <div id="rightcontent">
         <div class="webpartcontent">
             <h2>
-                Giới thiệu công ty
+                Lĩnh vực đầu tư
             </h2>
             <div class="menuleft">
                 <ul class="lt nic-treeview">
                     @{
-                        var newsCategories = ViewBag.newsCategories as List<NewsCategory>;
                         if (newsCategories != null)
                         {
                             foreach (var category in newsCategories)

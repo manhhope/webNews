@@ -1,7 +1,7 @@
 ﻿@using webNews.Security
 <div class="w-header">
     <div class="w-header-l">
-        <a href="index.html"></a>
+        <a href="/home"></a>
     </div>
     <div class="w-header-r">
         <ul class="lt w-header-search">
@@ -14,44 +14,7 @@
         <div class="cl">
         </div>
         <ul class="lt w-header-menu">
-            @Authentication.GetMenuFE()
-
-            <li><a href="index.html">Trang chủ</a></li>
-            <li>
-                <a href="/introduction">Giới thiệu</a>
-                <ul>
-                    <li><a href="gioi-thieu/thu-cua-chu-tich/chien-luoc/index.html" title="Hồ sơ c&#244;ng ty">Hồ sơ c&#244;ng ty</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="tin-tuc/quan-he-co-dong/index.html">Cổ đông</a>
-                <ul>
-                    <li><a href="tin-tuc/ban-tin-nha-dau-tu/index.html" title="Bản tin nh&#224; đầu tư">Bản tin nh&#224; đầu tư</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="tin-tuc/linh-vuc-dau-tu/index.html">Lĩnh vực đầu tư</a>
-                <ul>
-                    <li><a href="tin-tuc/bat-dong-san/bat-dong-san/index.html" title="Bất động sản">Bất động sản</a></li>
-                    <li><a href="tin-tuc/dao-tao-nghe/dao-tao-nghe/index.html" title="Đ&#224;o tạo nghề">Đ&#224;o tạo nghề</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="/projects">Dự án</a>
-                <ul>
-                    <li><a href="du-an/chung-cu-van-phong/index.html" title="TỔ HỢP CHUNG CƯ, VĂN PH&#210;NG">TỔ HỢP CHUNG CƯ, VĂN PH&#210;NG</a></li>
-                    <li><a href="du-an/thuong-mai-dich-vu/index.html" title="Thương mại, dịch vụ">Thương mại, dịch vụ</a></li>
-                    <li><a href="du-an/khach-san-resort/index.html" title="Kh&#225;ch sạn, resort">Kh&#225;ch sạn, resort</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="/news">Tin tức - Sự kiện</a>
-                
-            </li>
-            <li>
-                <a href="/recruitment">Tuyển dụng</a>
-            </li>
-            <li><a href="/contact">Liên hệ</a></li>
+            @Html.Raw(Authentication.GetMenuFE())
         </ul>
         <script type="text/javascript">
             $(document).ready(function () {
