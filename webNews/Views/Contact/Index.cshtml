@@ -1,0 +1,131 @@
+﻿@{
+    ViewBag.Title = "Liên hệ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using webNews.Domain.Entities;
+@using webNews.Domain
+@using System.Globalization;
+@using webNews.Security;
+
+@{
+    HomePageInfo pageInfo = new HomePageInfo();
+    var homePageInfo = Authentication.GetHomePageInfo();
+    if (homePageInfo != null)
+    {
+        pageInfo = homePageInfo as HomePageInfo;
+    }
+}
+
+<script src="~/ThemeFE/Scripts/Plugin/Pagging/pagging.js"></script>
+<div id="content">
+    <div id="leftcontent">
+        <div class="webpartcontent" style="margin-top: 27px;">
+            <iframe width="628" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/d/u/0/embed?mid=1CnXG4dYWkdo0b5XtmAdHpPg2TEkRx9fA"></iframe><br /><small>Xem <a href="https://www.google.com/maps/d/u/0/embed?mid=1CnXG4dYWkdo0b5XtmAdHpPg2TEkRx9fA" style="color:#0000FF;text-align:left">@pageInfo.Options.CompanyName</a> ở bản đồ lớn hơn</small>
+                                                                                                                                                                                                                <div class="info_address">
+                                                                                                                                                                                                                    <strong>@pageInfo.Options.CompanyName</strong> <br />
+                                                                                                                                                                                                                    @pageInfo.Options.CompanyAddress<br />
+                                                                                                                                                                                                                    Điện thoại: @pageInfo.Options.CompanyPhone<br />
+                                                                                                                                                                                                                    Email: @pageInfo.Options.CompanyEmail / Webiste: @pageInfo.Options.CompanyWebsite<br />
+                                                                                                                                                                                                                </div>
+            <div id="form-contact">
+                <form action="http://info@flc.vn/lien-he" enctype="multipart/form-data" method="post">
+                    <input name="__RequestVerificationToken" type="hidden" value="K8sEQJ6XQvVuq4HYzyNuFi5xthuxh7c8i1F+YzLifi7/EhhlqfCdYcC83+YyrUmP1wrjPNtfIUDovMcotM1Cl6hvIUZks9Dh9LjLWY/fiDS9tzXsolgkdnDqMB13DoUprOVkEx03HDZnSDTCdd1tyEX584imCU/St5ZwLMRETq8=" />
+                    <table>
+                        <tr>
+                            <td>
+                                <h3 class="title">
+                                    Gửi yêu cầu của bạn cho chúng tôi
+                                </h3>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="error" style="color: #ff0000;"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input id="FullName" name="FullName" type="text" onfocus="if(this.value == 'Họ và tên người gửi'){this.value = '';};" onblur="if(this.value == ''){this.value = 'Họ và tên người gửi';}" value="Họ và tên người gửi" autocomplete="off" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input id="Email" name="Email" type="text" onfocus="if(this.value == 'Email của bạn'){this.value = '';};" onblur="if(this.value == ''){this.value = 'Email của bạn';}" value="Email của bạn" autocomplete="off" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="ContactContent">Nội dung</label>:
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="contact-content" style="border: 1px solid #555555;">
+                                <textarea cols="20" id="ContactContent" name="ContactContent" rows="2">
+
+</textarea>
+                                <input type="submit" value="Gửi" />
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="rightcontent">
+        <div class="webpartcontent">
+            <h2>
+                Tin tức - sự kiện
+            </h2>
+            <div class="menuleft">
+                <ul class="lt nic-treeview">
+                    @{
+                        var newsCategories = ViewBag.newsCategories as List<NewsCategory>;
+                        if (newsCategories != null)
+                        {
+                            foreach (var category in newsCategories)
+                            {
+                                <li class="active item item-0">
+                                    <a class="active a-item-0" href="@category.Slug" title="@category.Title">@category.Title</a>
+                                    @if (category.CategoryChilds != null && category.CategoryChilds.Count > 0)
+                                    {
+                                        <ul class="lt">
+                                            @foreach (var child in category.CategoryChilds)
+                                            {
+                                                <li class="item item-1">
+                                                    <a class="a-item-1" href="@child.Slug" title="@child.Title">@child.Title</a>
+                                                </li>
+                                            }
+                                        </ul>
+                                    }
+                                </li>
+                            }
+                        }
+
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="webpartcontent" style="display:none;">
+            <h2>
+                <a href="../../thu-vien-hinh-anh/index.html" title="Thư viện ảnh">Thư viện ảnh</a>
+            </h2>
+            <div class="gallerylist">
+                <ul class="list-item gallery">
+                    <li class="Gallery-item-1">
+                        <a href="../../Gallery/List/index.html@categoryid=4074.html" title="Giải đấu năm nay c&#243; gần 300 golfer tham dự v&#224; để lại ấn tượng đẹp trong l&#242;ng c&#225;c golf thủ.">
+                            <img src="../../Images/Gallery/giai-dau-nam-nay-co-gan-300-golfer-tham-du-va-de-lai-an-tuong-dep-trong-long-cac-golf-thu-41201442409am.jpg" alt="Giải đấu năm nay c&#243; gần 300 golfer tham dự v&#224; để lại ấn tượng đẹp trong l&#242;ng c&#225;c golf thủ." />
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="webpartcontent" style="display:none;">
+            <h2>
+                <a href="../../thu-vien-hinh-anh/index.html" title="Thư viện Video">Thư viện Video</a>
+            </h2>
+            <div class="gallerylist">
+                <embed width="245" height="135" wmode="transparent" type="application/x-shockwave-flash" src="https://www.youtube.com/v/m1g36ymGxNY" />
+            </div>
+        </div>
+    </div>
+    <div class="clear">
+    </div>
+</div>

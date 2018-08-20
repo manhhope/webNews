@@ -1,104 +1,91 @@
 ﻿@using webNews.Security
-
-<div class="nav_menu">
-    <nav>
-        <div class="nav toggle">
-            <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-        </div>
-        <ul class="nav navbar-nav navbar-right">
-            <li class="">
-                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    @{
-                        @*if (Authentication.GetUserAvatar() != "" && Authentication.GetUserAvatar() != null)
-                        {
-                            <img src="@Authentication.GetUserAvatar()" alt="@Authentication.GetUserName()">
-                        }
-                        else
-                        {*@
-                            var ran = new Random();
-                            var index = ran.Next(2, 14);
-                            string avatar = "Content/avatar/a" + index + ".png";
-                            <img src="@avatar" alt="@Authentication.GetUserName()">
-                        @*  *@}
-                    }
-                    <span class=" fa fa-angle-down"></span>
-                </a>
-                <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="/Profile"> Profile</a></li>
-                    <li>
-                        <a href="javascript:;">
-                            <span class="badge bg-red pull-right">50%</span>
-                            <span>Settings</span>
-                        </a>
-                    </li>
-                    <li><a href="javascript:;">Help</a></li>
-                    <li><a class="btnClick"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
-                </ul>
-            </li>
-            <li role="presentation" class="dropdown">
-                <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                    <i class="fa fa-envelope-o"></i>
-                    <span class="badge bg-green">6</span>
-                </a>
-                <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                    <li>
-                        <a>
-                            <span class="image"><img src="~/Content/images/img.jpg" alt="Profile Image" /></span>
-                            <span>
-                                <span>John Smith</span>
-                                <span class="time">3 mins ago</span>
-                            </span>
-                            <span class="message">
-                                Film festivals used to be do-or-die moments for movie makers. They were where...
-                            </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a>
-                            <span class="image"><img src="~/Content/images/img.jpg" alt="Profile Image" /></span>
-                            <span>
-                                <span>John Smith</span>
-                                <span class="time">3 mins ago</span>
-                            </span>
-                            <span class="message">
-                                Film festivals used to be do-or-die moments for movie makers. They were where...
-                            </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a>
-                            <span class="image"><img src="~/Content/images/img.jpg" alt="Profile Image" /></span>
-                            <span>
-                                <span>John Smith</span>
-                                <span class="time">3 mins ago</span>
-                            </span>
-                            <span class="message">
-                                Film festivals used to be do-or-die moments for movie makers. They were where...
-                            </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a>
-                            <span class="image"><img src="~/Content/images/img.jpg" alt="Profile Image" /></span>
-                            <span>
-                                <span>John Smith</span>
-                                <span class="time">3 mins ago</span>
-                            </span>
-                            <span class="message">
-                                Film festivals used to be do-or-die moments for movie makers. They were where...
-                            </span>
-                        </a>
-                    </li>
-                    <li>
-                        <div class="text-center">
-                            <a>
-                                <strong>See All Alerts</strong>
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </div>
-                    </li>
-                </ul>
+<div class="w-header">
+    <div class="w-header-l">
+        <a href="index.html"></a>
+    </div>
+    <div class="w-header-r">
+        <ul class="lt w-header-search">
+            <li>
+                <form action="#" method="post">
+                    <input id="keyword" name="keyword" type="text" autocomplete="off" value="Search" onblur="if(this.value == ''){this.value = 'Search';}" onfocus="if(this.value == 'Search'){this.value = '';};" />
+                </form>
             </li>
         </ul>
-    </nav>
+        <div class="cl">
+        </div>
+        <ul class="lt w-header-menu">
+            @Authentication.GetMenuFE()
+
+            <li><a href="index.html">Trang chủ</a></li>
+            <li>
+                <a href="/introduction">Giới thiệu</a>
+                <ul>
+                    <li><a href="gioi-thieu/thu-cua-chu-tich/chien-luoc/index.html" title="Hồ sơ c&#244;ng ty">Hồ sơ c&#244;ng ty</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="tin-tuc/quan-he-co-dong/index.html">Cổ đông</a>
+                <ul>
+                    <li><a href="tin-tuc/ban-tin-nha-dau-tu/index.html" title="Bản tin nh&#224; đầu tư">Bản tin nh&#224; đầu tư</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="tin-tuc/linh-vuc-dau-tu/index.html">Lĩnh vực đầu tư</a>
+                <ul>
+                    <li><a href="tin-tuc/bat-dong-san/bat-dong-san/index.html" title="Bất động sản">Bất động sản</a></li>
+                    <li><a href="tin-tuc/dao-tao-nghe/dao-tao-nghe/index.html" title="Đ&#224;o tạo nghề">Đ&#224;o tạo nghề</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="/projects">Dự án</a>
+                <ul>
+                    <li><a href="du-an/chung-cu-van-phong/index.html" title="TỔ HỢP CHUNG CƯ, VĂN PH&#210;NG">TỔ HỢP CHUNG CƯ, VĂN PH&#210;NG</a></li>
+                    <li><a href="du-an/thuong-mai-dich-vu/index.html" title="Thương mại, dịch vụ">Thương mại, dịch vụ</a></li>
+                    <li><a href="du-an/khach-san-resort/index.html" title="Kh&#225;ch sạn, resort">Kh&#225;ch sạn, resort</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="/news">Tin tức - Sự kiện</a>
+                
+            </li>
+            <li>
+                <a href="/recruitment">Tuyển dụng</a>
+            </li>
+            <li><a href="/contact">Liên hệ</a></li>
+        </ul>
+        <script type="text/javascript">
+            $(document).ready(function () {
+
+                var _activeUrl = "";
+
+                if (_activeUrl != "") {
+                    var _objMenuActive = $("ul.w-header-menu li a");
+                    _objMenuActive.removeClass("active");
+
+                    $(_objMenuActive).each(function() {
+                        if ($(this).attr("href") == _activeUrl) {
+                            $(this).addClass("active");
+                        }
+                    });
+                } else {
+                    var pathArray = window.location.pathname.split('/');
+                    _activeUrl = pathArray[1].toLowerCase();
+
+                    var _objMenuActive = $("ul.w-header-menu li a");
+                    _objMenuActive.removeClass("active");
+
+                    $(_objMenuActive).each(function () {
+                        if ($(this).attr("href").toLowerCase() == "/" + _activeUrl) {
+                            $(this).addClass("active");
+                        }
+                    });
+                }
+            });
+        </script>
+
+        <div class="cl">
+        </div>
+    </div>
+    <div class="cl">
+    </div>
 </div>

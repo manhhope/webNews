@@ -1,0 +1,46 @@
+﻿@using webNews.Domain
+@{
+    HomePageInfo pageInfo = new HomePageInfo();
+    if (Page.info != null)
+    {
+        pageInfo = Page.info as HomePageInfo;
+    }
+}
+<div class="w-footer">
+    <div class="w-footer-c">
+        <div class="footerleft">
+            @Html.Raw(pageInfo.Options.FooterText)
+            <br />
+            <br />
+        </div>
+        <div class="footerright">
+            <img src="@pageInfo.Options.FooterImage" />
+        </div>
+    </div>
+</div>
+<div class="w-footer-bt">
+    <ul style="width: 930px; margin: 0 auto;">
+        @{
+            foreach (var item in pageInfo.Branches)
+            {
+                <li><a href="@item.TargetUrl" target="_blank" class="desaturate"><img src="@item.ImageUrl" /></a></li>
+            }
+        }
+
+        <li><a href="http://flcquynhon.com.vn" target="_blank" class="desaturate"><img src="~/ThemeFE/Images/quynhon-beach-golf-resort.png" /></a></li>
+        <li><a href="index.html#" target="_blank" class="desaturate"><img src="~/ThemeFE/Images/halong-golf-resort.png" /></a></li>
+        <li><a href="http://vinhthinhresort.vn" target="_blank" class="desaturate"><img src="~/ThemeFE/Images/vinhthinh.png" /></a></li>
+        <li><a href="http://flchotelsamson.com" target="_blank" class="desaturate"><img src="~/ThemeFE/Images/luxury-hotel.png" /></a></li>
+        <li><a href="http://flcresortsamson.com" target="_blank" class="desaturate"><img src="~/ThemeFE/Images/luxury-resort.png" /></a></li>
+        <li><a href="http://www.thesamsongolflinks.com" target="_blank" class="desaturate"><img src="~/ThemeFE/Images/golf-links.png" /></a></li>
+        <!--li><a href="#" target="_blank" class="desaturate"><img src="/~/ThemeFE/Images/flc-hotels-resorts.png" /></a><li/!-->
+        <li><a href="http://flchotelquynhon.com/" target="_blank" class="desaturate"><img src="~/ThemeFE/Images/luxury-hotel-quynhon.png" /></a></li>
+        <li><a href="http://flcresortquynhon.com/" target="_blank" class="desaturate"><img src="~/ThemeFE/Images/luxury-resort-quynhon.png" /></a></li>
+        <li><a href="http://flcgolf.vn/" target="_blank" class="desaturate"><img src="~/ThemeFE/Images/golf-links-quynhon.png" /></a></li>
+        <li><a href="http://flcresortsamson.com" target="_blank" class="desaturate"><img src="~/ThemeFE/Images/luxury-resort.png" /></a></li>
+        <li><a href="http://www.thesamsongolflinks.com" target="_blank" class="desaturate"><img src="~/ThemeFE/Images/golf-links.png" /></a></li>
+        <!--li><a href="#" target="_blank" class="desaturate"><img src="/~/ThemeFE/Images/flc-hotels-resorts.png" /></a><li/!-->
+    </ul>
+</div>
+<div style="color: #acacac; width: 930px; margin: 0 auto; padding: 10px 0 0px 0; text-align: right;line-height:30px;">@Html.Raw(pageInfo.Options.Copyright)</div>
+<a class="backtop"></a>

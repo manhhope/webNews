@@ -76,6 +76,12 @@
       <DependentUpon>OrmLite.Poco.tt</DependentUpon>
     </Compile>
     <Compile Include="DomainModule.cs" />
+    <Compile Include="Entities\HomePageInfo.cs" />
+    <Compile Include="Entities\Medium.cs" />
+    <Compile Include="Entities\MenuFE.cs" />
+    <Compile Include="Entities\News.cs" />
+    <Compile Include="Entities\ProjectCategory.cs" />
+    <Compile Include="Entities\NewsCategory.cs" />
     <Compile Include="Language.cs">
       <DependentUpon>OrmLite.Poco.tt</DependentUpon>
     </Compile>
@@ -151,6 +157,9 @@
     <Compile Include="System_Menu.cs">
       <DependentUpon>OrmLite.Poco.tt</DependentUpon>
     </Compile>
+    <Compile Include="System_Option.cs">
+      <DependentUpon>OrmLite.Poco.tt</DependentUpon>
+    </Compile>
     <Compile Include="System_User.cs">
       <DependentUpon>OrmLite.Poco.tt</DependentUpon>
     </Compile>
@@ -201,9 +210,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Entities\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\webNews.Models\webNews.Models.csproj">
       <Project>{854d1f5a-aee4-4d32-8f26-6869a820203c}</Project>

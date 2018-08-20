@@ -11,19 +11,8 @@
     <meta name="author" content="">
     <link rel="icon" type="image/png" sizes="16x16" href="~/Theme/plugins/images/favicon.png">
     <title>@ViewBag.Title - CMS System</title>
-    <!-- Bootstrap Core CSS -->
-    <link href="~/Theme/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Menu CSS -->
-    <link href="~/Theme/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
-    <!-- toast CSS -->
-    <link href="~/Theme/plugins/bower_components/toast-master/css/jquery.toast.css" rel="stylesheet">
-    <!-- morris CSS -->
-    <link href="~/Theme/plugins/bower_components/morrisjs/morris.css" rel="stylesheet">
-    <!-- chartist CSS -->
-    <link href="~/Theme/plugins/bower_components/chartist-js/dist/chartist.min.css" rel="stylesheet">
-    <link href="~/Theme/plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css" rel="stylesheet">
-    <!-- Calendar CSS -->
-    <link href="~/Theme/plugins/bower_components/calendar/dist/fullcalendar.css" rel="stylesheet" />
+
+    @Styles.Render("~/Content/css/theme");
     <!-- animation CSS -->
     <link href="~/Theme/css/animate.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -36,6 +25,9 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <!-- Menu CSS -->
+    <link href="~/Scripts/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="~/Scripts/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
 </head>
 
 <body class="fix-header">
@@ -95,7 +87,7 @@
                     </div>
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                         <button class="right-side-toggle waves-effect waves-light btn-info btn-circle pull-right m-l-20"><i class="ti-settings text-white"></i></button>
-                        
+
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -197,32 +189,8 @@
     <!-- End Wrapper -->
     <!-- ============================================================== -->
     <!-- ============================================================== -->
-    <!-- All Jquery -->
-    <!-- ============================================================== -->
-    <script src="~/Theme/plugins/bower_components/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap Core JavaScript -->
-    <script src="~/Theme/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- Menu Plugin JavaScript -->
-    <script src="~/Theme/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
-    <!--slimscroll JavaScript -->
-    <script src="~/Theme/js/jquery.slimscroll.js"></script>
-    <!--Wave Effects -->
-    <script src="~/Theme/js/waves.js"></script>
-    <!-- chartist chart -->
-    <script src="~/Theme/plugins/bower_components/chartist-js/dist/chartist.min.js"></script>
-    <script src="~/Theme/plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js"></script>
-    <!-- Sparkline chart JavaScript -->
-    <script src="~/Theme/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
-    <!-- Custom Theme JavaScript -->
-    <script src="~/Theme/js/custom.min.js"></script>
-    <script src="~/Theme/js/dashboard1.js"></script>
-    <script src="~/Theme/plugins/bower_components/toast-master/js/jquery.toast.js"></script>
-    <!--Style Switcher -->
-    <script src="~/Theme/plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
 
-    <script src="~/Scripts/Common/language-vi.js"></script>
-    <script src="~/Scripts/Common/Service.js"></script>
-    <script src="~/Scripts/HomePage/Ctrl.js"></script>
+    @Scripts.Render("~/bundles/theme")
 
     @RenderSection("scripts", required: false)
 </body>

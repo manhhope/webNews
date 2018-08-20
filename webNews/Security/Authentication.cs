@@ -2,7 +2,9 @@
 using System.Linq;
 using System.Web;
 using System.Web.SessionState;
+using webNews.Domain;
 using webNews.Domain.Entities;
+using System.Web.Caching;
 using static System.String;
 
 namespace webNews.Security
@@ -12,6 +14,61 @@ namespace webNews.Security
         public static void ClearAllSession()
         {
         }
+
+        public static HomePageInfo GetHomePageInfo()
+        {
+            var cache = new Cache();
+            HomePageInfo defaultInfo = null;
+
+            if (cache.Get("###HOME_PAGE_INFO###") == null) return defaultInfo;
+
+            return cache.Get("###HOME_PAGE_INFO###") as HomePageInfo;
+        }
+
+        public static void MarkHomePageInfo(HomePageInfo homePageInfo)
+        {
+            var cache = new Cache();
+            cache.Insert("###HOME_PAGE_INFO###", homePageInfo);
+        }
+
+        public static string BuildMenuFE(List<MenuFE> menus)
+        {
+            var menuString = "";
+
+            foreach(MenuFE menu in menus)
+            {
+                menuString += "<li>";
+                if(menu.Slug == "trang-chu")
+                    menuString += $"<a class=\"active\" title=\"{menu.Name}\" href=\"{menu.Slug}\">{menu.Name}</a>";
+                menuString += $"<a href=\"{menu.Slug}\">{menu.Name}</a>";
+
+                //Check menu has childs
+                if (menu.MenuChilds != null && menu.MenuChilds.Count > 0)
+                    menuString += $"<ul>{BuildMenuFE(menu.MenuChilds)}</ul>";
+
+                menuString += "</li>";
+            }
+
+            return menuString;
+        }
+
+        public static void MarkMenuFE(List<MenuFE> menus)
+        {
+            HttpContext.Current.Session["###MENU_FE###"] = BuildMenuFE(menus);
+        }
+
+        public static string GetMenuFE()
+        {
+            if (HttpContext.Current == null || HttpContext.Current.Session == null) return string.Empty;
+
+            if (HttpContext.Current.Session["###MENU_FE###"] == null)
+            {
+                HttpContext.Current.Session["###MENU_FE###"] = string.Empty;
+            }
+
+            return HttpContext.Current.Session["###MENU_FE###"].ToString();
+        }
+
         public static bool Authenticate(string username, string password)
         {
             HttpContext.Current.Session.Timeout = 600;
@@ -27,7 +84,7 @@ namespace webNews.Security
         public static bool Logout()
         {
             if (GetUserName() == null) return true;
-            if (HttpContext.Current == null) return true;
+            if (HttpContext.Current == null || HttpContext.Current.Session == null) return true;
             HttpContext.Current.Session.Abandon();
             HttpContext.Current.Response.Cookies.Add(new HttpCookie("ASP.NET_SessionId", ""));
             SessionIDManager manager = new SessionIDManager();
@@ -38,23 +95,17 @@ namespace webNews.Security
             manager.SaveSessionID(HttpContext.Current, newId, out isRedirected, out isAdded);
             return true;
         }
+
         public static string GetMenu()
         {
-            if (HttpContext.Current == null) return string.Empty;
+            if (HttpContext.Current == null || HttpContext.Current.Session == null) return string.Empty;
             if (HttpContext.Current.Session["###Menu###"] == null) return string.Empty;
             return HttpContext.Current.Session["###Menu###"].ToString();
 
         }
-        public static string GetMenuUser()
-        {
-            if (HttpContext.Current == null) return string.Empty;
-            if (HttpContext.Current.Session["###MenuUser###"] == null) return string.Empty;
-            return HttpContext.Current.Session["###MenuUser###"].ToString();
-
-        }
         public static void MarkLanguage(string language)
         {
-            if (HttpContext.Current == null) return;
+            if (HttpContext.Current == null || HttpContext.Current.Session == null) return;
             HttpContext.Current.Session["languagecode"] = language;
         }
         public static void MarkAuthenticate(System_User user, Vw_UserInfo userInfo)
@@ -66,12 +117,12 @@ namespace webNews.Security
         }
         public static void MarkPermission(List<Security_VwRoleService> permission)
         {
-            if (HttpContext.Current == null) return;
+            if (HttpContext.Current == null || HttpContext.Current.Session == null) return;
             HttpContext.Current.Session["permission"] = permission;
         }
         public static void MarkRole(List<Security_UserRole> listRole)
         {
-            if (HttpContext.Current == null) return;
+            if (HttpContext.Current == null || HttpContext.Current.Session == null) return;
             HttpContext.Current.Session["roleUser"] = listRole;
         }
         public static void MarkMennu(List<System_Menu> menus)
@@ -80,39 +131,33 @@ namespace webNews.Security
             HttpContext.Current.Session["###Menu###"] = menu;
 
         }
-        public static void MarkMenuUser(List<System_Menu> menus)
-        {
-            var menu = menus.Where(p => (p.ParentId ?? 0) == 0).OrderBy(p => p.MenuOrder).ToList().Aggregate("", (current, item) => current + BuildMenu(item, menus));
-            HttpContext.Current.Session["###MenuUser###"] = menu;
-
-        }
         public static List<Security_VwRoleService> GetPermission()
         {
-            if (HttpContext.Current == null) return new List<Security_VwRoleService>();
+            if (HttpContext.Current == null || HttpContext.Current.Session == null) return new List<Security_VwRoleService>();
             if (HttpContext.Current.Session["permission"] == null) return new List<Security_VwRoleService>();
             return (List<Security_VwRoleService>)HttpContext.Current.Session["permission"];
         }
         public static void MarkCaptchar(string captchar)
         {
-            if (HttpContext.Current == null) return;
+            if (HttpContext.Current == null || HttpContext.Current.Session == null) return;
             HttpContext.Current.Session["Captcha"] = captchar;
         }
         public static int GetUserId()
         {
-            if (HttpContext.Current == null) return -1;
+            if (HttpContext.Current == null || HttpContext.Current.Session == null) return -1;
             if (HttpContext.Current.Session["userid"] == null) return -1;
             return (int)HttpContext.Current.Session["userid"];
 
         }
         public static System_User GetUser()
         {
-            if (HttpContext.Current == null) return null;
+            if (HttpContext.Current == null || HttpContext.Current.Session == null) return null;
             if (HttpContext.Current.Session["===user==="] == null) return null;
             return (System_User)HttpContext.Current.Session["===user==="];
         }
         public static Vw_UserInfo GetUserInfo()
         {
-            if (HttpContext.Current == null) return null;
+            if (HttpContext.Current == null || HttpContext.Current.Session == null) return null;
             if (HttpContext.Current.Session["===userInfo==="] == null) return null;
             return (Vw_UserInfo)HttpContext.Current.Session["===userInfo==="];
         }
@@ -204,14 +249,14 @@ namespace webNews.Security
         }
         public static string GetLanguageCode()
         {
-            if (HttpContext.Current == null) return "vi";
+            if (HttpContext.Current == null || HttpContext.Current.Session == null) return "vi";
             if (HttpContext.Current.Session["languagecode"] == null) return "vi";
             return (string)HttpContext.Current.Session["languagecode"];
 
         }
         public static string GetUserName()
         {
-            if (HttpContext.Current == null) return null;
+            if (HttpContext.Current == null || HttpContext.Current.Session == null) return null;
             if (HttpContext.Current.Session["username"] == null) return null;
             return HttpContext.Current.Session["username"].ToString();
 

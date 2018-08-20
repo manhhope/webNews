@@ -1,0 +1,8 @@
+﻿@using webNews.Domain
+@{
+    HomePageInfo pageInfo = new HomePageInfo();
+    if (Page.info != null)
+    {
+        pageInfo = Page.info as HomePageInfo;
+    }
+}

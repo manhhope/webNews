@@ -10,7 +10,7 @@ namespace webNews.Security
         public static bool Authorize(Permission permission)
         {
             // need to test for implement
-            if (Authentication.GetUserName().ToLower() == "administrator")
+            if (Authentication.GetUserName().ToLower() == "administrator" || Authentication.GetUserName().ToLower() == "admin")
                 return true;
             var routeValues = HttpContext.Current.Request.RequestContext.RouteData.Values;
             if (routeValues != null)

@@ -8,6 +8,12 @@ namespace webNews.Domain.Services
 {
     public interface ISystemService
     {
+        HomePageInfo GetPageInfo(Filter filter);
+        List<System_Menu> GetMenu();
+        PagingObject<News> GetNews(Filter filter);
+        List<NewsCategory> GetNewCategories(Filter filter);
+        List<ProjectCategory> GetProjectCategories(Filter filter);
+        PagingObject<Project> GetProjects(Filter filter);
         bool Security_Permission_Update(Security_Permission request);
         int Security_Permission_Delete(int id);
         string ReplaceStringWithToken(Dictionary<string, string> tokens, string input);

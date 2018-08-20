@@ -22,6 +22,164 @@ namespace webNews.Domain.Repositories
             _connectionFactory = connectionFactory;
         }
 
+        public HomePageInfo GetPageInfo(Filter filter)
+        {
+            var pageInfo = new HomePageInfo();
+
+            using (var db = _connectionFactory.Open())
+            {
+                var query = db.From<System_Menu>();
+                query = query.Where(x => x.ShowMenu == true && x.Area == "FE" && x.MenuLevel == 1
+                                && (filter.Lang != "all" || x.Lang == filter.Lang))
+                            .OrderBy(x => x.MenuOrder);
+
+                pageInfo.Menus = db.Select(query);
+
+                var medias = db.Select<Medium>();
+
+                pageInfo.Branches = medias.Where(x => x.MediaType == Medium.TYPE_BRANCH).Select(x => new BasicInfo {
+                    Content = x.Content,
+                    ImageUrl = x.Source,
+                    Href = x.Slug,
+                    TargetUrl = x.Slug,
+                    Title = x.Content
+                }).ToList();
+
+                pageInfo.Banners = medias.Where(x => x.MediaType == Medium.TYPE_BANNER).Select(x => new BasicInfo
+                {
+                    Content = x.Content,
+                    ImageUrl = x.Source,
+                    Href = x.Slug,
+                    TargetUrl = x.Slug,
+                    Title = x.Content
+                }).ToList();
+
+                var logo = medias.Where(x => x.MediaType == Medium.TYPE_LOGO).Select(x => new BasicInfo
+                {
+                    Content = x.Content,
+                    ImageUrl = x.Source,
+                    Href = x.Slug,
+                    TargetUrl = x.Slug,
+                    Title = x.Content
+                }).FirstOrDefault();
+
+                pageInfo.Logo = logo != null ? logo.ImageUrl : HomePageInfo.LOGO_DEFAULT;
+
+                pageInfo.Options = db.Select<System_Option>().FirstOrDefault();
+            }
+
+            return pageInfo;
+        }
+
+
+        public PagingObject<News> GetNews(Filter filter)
+        {
+            var returnObj = new PagingObject<News>();
+            try
+            {
+                using (var db = _connectionFactory.Open())
+                {
+                    var query = db.From<News>();
+                    query = query.Where(x => x.Status == 1 && x.Type == filter.Type && (filter.Lang == "all" || x.Lang == filter.Lang));
+
+                    if (filter.CateId != 0)
+                    {
+                        query = query.Where(x => x.CategoryId == filter.CateId);
+                    }
+
+                    returnObj.Total = Convert.ToInt32(db.Count(query));
+                    query = query.Skip(filter.Page * filter.PageLength).Take(filter.PageLength);
+                    returnObj.DataList = db.Select(query);
+                    returnObj.CurrentPage = filter.Page;
+                    returnObj.PageSize = filter.PageLength;
+
+                    return returnObj;
+
+                }
+            }
+            catch(Exception ex)
+            {
+                _logger.Info("Get news error", ex, ex.Message, ex.StackTrace);
+
+                return null;
+            }
+        }
+
+        public List<NewsCategory> GetNewCategories(Filter filter)
+        {
+            try
+            {
+                using (var db = _connectionFactory.Open())
+                {
+                    var query = db.From<NewsCategory>();
+                    query = query.Where(x => x.Status == 1 && x.Type == filter.Type && (filter.Lang == "all" || x.Lang == filter.Lang));
+                    
+                    return db.Select(query);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.Info("Get news category error", ex, ex.Message, ex.StackTrace);
+
+                return null;
+            }
+        }
+
+        public List<ProjectCategory> GetProjectCategories(Filter filter)
+        {
+            try
+            {
+                using (var db = _connectionFactory.Open())
+                {
+                    var query = db.From<ProjectCategory>();
+                    query = query.Where(x => x.Status == 1 && (filter.Lang != "all" || x.Lang == filter.Lang));
+
+                    return db.Select(query);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.Info("Get projects category error", ex, ex.Message, ex.StackTrace);
+
+                return null;
+            }
+        }
+
+        public PagingObject<Project> GetProjects(Filter filter)
+        {
+            var returnObj = new PagingObject<Project>();
+            try
+            {
+                using (var db = _connectionFactory.Open())
+                {
+                    var query = db.From<Project>();
+                    query = query.Where(x => x.Status == 1 && (filter.Lang == "all" || x.Lang == filter.Lang));
+
+                    if (filter.CateId != 0)
+                    {
+                        query = query.Where(x => x.CategoryId == filter.CateId);
+                    }
+
+                    returnObj.Total = Convert.ToInt32(db.Count(query));
+                    query = query.Skip(filter.Page * filter.PageLength).Take(filter.PageLength);
+                    returnObj.DataList = db.Select(query);
+                    returnObj.CurrentPage = filter.Page;
+                    returnObj.PageSize = filter.PageLength;
+
+                    return returnObj;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.Info("Get projects error", ex, ex.Message, ex.StackTrace);
+
+                return null;
+            }
+        }
+
         public List<System_Menu> GetMenu()
         {
             using(var db = _connectionFactory.Open())
@@ -115,7 +273,7 @@ namespace webNews.Domain.Repositories
             catch(Exception ex)
             {
                 _logger.Error("Security_Permission_Update fail: " + ex.Message);
-                return -1;
+                return 0;
             }
         }
 
@@ -188,7 +346,7 @@ namespace webNews.Domain.Repositories
                         pageIndex = 0;
                     else
                         pageIndex = (pageIndex / pageSize);
-                    if(pageIndex != -1 && pageSize != -1)
+                    if(pageIndex != 0 && pageSize != 0)
                     {
                         query.Skip(pageIndex * pageSize).Take(pageSize);
                     }
@@ -220,7 +378,7 @@ namespace webNews.Domain.Repositories
                         pageIndex = 0;
                     else
                         pageIndex = (pageIndex / pageSize);
-                    if(pageIndex != -1 && pageSize != -1)
+                    if(pageIndex != 0 && pageSize != 0)
                     {
                         query.Skip(pageIndex * pageSize).Take(pageSize);
                     }
@@ -262,5 +420,6 @@ namespace webNews.Domain.Repositories
                 return null;
             }
         }
+
     }
 }

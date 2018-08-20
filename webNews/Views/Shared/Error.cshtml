@@ -1,9 +1,37 @@
 ﻿@model System.Web.Mvc.HandleErrorInfo
 
 @{
-    ViewBag.Title = "Error";
+    ViewBag.Title = "website cms.vn đang được nâng cấp <br>" +
+                            "Quý khách vui lòng trở lại sau.Xin cảm ơn!";
 }
 
-<h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Error</title>
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <!-- Bootstrap 3.3.4 -->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+</head>
+<body class="skin-blue sidebar-mini">
+    <div class="wrapper">
 
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Main content -->
+            <section class="content">
+                <div style="text-align:center;">
+                    <h2> 404</h2>
+                    <div>
+                        <h3><i class="fa fa-warning text-yellow"></i> FLC Group.</h3>
+                        <p>
+                            @ViewBag.Title
+                        </p>
+                    </div><!-- /.error-content -->
+                </div><!-- /.error-page -->
+            </section><!-- /.content -->
+        </div><!-- /.content-wrapper -->
+    </div><!-- ./wrapper -->
+</body>
+</html>

@@ -15,11 +15,11 @@ using ServiceStack;
 namespace webNews.Domain.Entities
 {
 	[Alias("Route")]
-    public partial class Route : IHasId<long> 
+    public partial class Route : IHasId<int> 
     {
         [Alias("Id")]
         [AutoIncrement]
-        public long Id { get; set; }
+        public int Id { get; set; }
         [Required]
         public int ObjectType { get; set; }
         public int? ObjectId { get; set; }

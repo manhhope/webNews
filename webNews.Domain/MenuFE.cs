@@ -18,7 +18,7 @@ namespace webNews.Domain.Entities
     public partial class MenuFE : IHasId<int> 
     {
         [Alias("Id")]
-        [Required]
+        [AutoIncrement]
         public int Id { get; set; }
         public int? ParentId { get; set; }
         public string Name { get; set; }
@@ -26,6 +26,7 @@ namespace webNews.Domain.Entities
         public bool? Show { get; set; }
         public int? MenuLevel { get; set; }
         public int? Order { get; set; }
+        public string Lang { get; set; }
     }
 
 }

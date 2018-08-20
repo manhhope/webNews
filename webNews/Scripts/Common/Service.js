@@ -1293,6 +1293,7 @@ var Service = function () {
 var Sv = new Service();
 
 $(document).ready(function () {
+    $("table thead tr").first().hide();
     /*  Description: Cấu hình datetimepicker
                 Author: PMNinh  */
     $('.input-date').datetimepicker({

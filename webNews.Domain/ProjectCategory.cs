@@ -15,12 +15,13 @@ using ServiceStack;
 namespace webNews.Domain.Entities
 {
 	[Alias("ProjectCategory")]
-    public partial class ProjectCategory : IHasId<long> 
+    public partial class ProjectCategory : IHasId<int> 
     {
         [Alias("Id")]
         [AutoIncrement]
-        public long Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
+        public string Slug { get; set; }
         public string Description { get; set; }
         public int? Order { get; set; }
         public string Image { get; set; }
@@ -33,6 +34,7 @@ namespace webNews.Domain.Entities
         public DateTime? UpdatedDate { get; set; }
         public string UpdatedBy { get; set; }
         public int? UpdatedById { get; set; }
+        public string Lang { get; set; }
     }
 
 }

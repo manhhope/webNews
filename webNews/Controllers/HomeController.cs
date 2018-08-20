@@ -14,5 +14,17 @@ namespace webNews.Controllers
             else
                 return View();
         }
+
+        public ActionResult ChangeLanguage(string lang)
+        {
+            Authentication.MarkLanguage(lang);
+
+            return null;
+        }
+
+        public ActionResult SendEmail()
+        {
+            return null;
+        }
 	}
 }

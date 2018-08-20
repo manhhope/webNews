@@ -45,6 +45,7 @@
     <Compile Include="Common\Constant.cs" />
     <Compile Include="Common\HandlerPassword.cs" />
     <Compile Include="CoreMessageResponse.cs" />
+    <Compile Include="Filter.cs" />
     <Compile Include="MessageResult.cs" />
     <Compile Include="PagingObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -52,6 +53,9 @@
     <Compile Include="SelectListModel.cs" />
     <Compile Include="UserManagement\SearchUserModel.cs" />
     <Compile Include="User\UserSearchModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="News\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

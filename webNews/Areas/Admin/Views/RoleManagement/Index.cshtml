@@ -1,15 +1,17 @@
 ﻿@using webNews.Language.Language
 @using webNews.Security
 @{
-    ViewBag.Title = "QUẢN LÝ NHÓM QUYỀN";
-    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
-    var caption = MvcHtmlString.Create("Quản lý nhóm quyền");
+                /**/
+
+                ViewBag.Title = "QUẢN LÝ NHÓM QUYỀN";
+                Layout = "~/Areas/Admin/Views/Shared/_LayoutPage.cshtml";
+                var caption = MvcHtmlString.Create("Quản lý nhóm quyền");
 }
 @model dynamic
 <h2 class="page-header">@caption</h2>
 <div class="main-content">
     <div class="page-action">
-        @if(CheckAuthorizer.Authorize(Permission.ADD))
+        @if (CheckAuthorizer.Authorize(Permission.ADD))
         {
             <button id="btnOpenAdd" class="btn btn-primary" type="button" title="@(Resource.Btn_Add_Lang)"><i class="fa fa-plus-square-o"></i>@(Resource.Btn_Add_Lang)</button>
         }
@@ -26,7 +28,8 @@
     </div>
     <div id="box-detail"></div>
 </div>
-@section scripts
+
+@section Scripts
 {
-    <script src="~/Scripts/Admin/RoleManagement/RoleManagement.js"></script>
+    @Scripts.Render("~/bundles/RoleManagement");
 }

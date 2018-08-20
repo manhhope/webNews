@@ -73,7 +73,6 @@ namespace webNews.Services.SecurityService
                 var menus = _systemRepository.GetMenu();
                 var menusUser = _systemRepository.GetMenuUser();
                 Authentication.MarkMennu(menus);
-                Authentication.MarkMenuUser(menusUser);
                // var menu = Authentication.GetMenuUser();
                 userinfo = user;
                 _log.Info("MarkMennu valid");
