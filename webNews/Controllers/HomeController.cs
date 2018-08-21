@@ -1,12 +1,16 @@
 ﻿using System;
+using System.Threading;
+using System.Web;
 using System.Web.Mvc;
 using webNews.Domain.Entities;
 using webNews.Domain.Services;
 using webNews.Security;
+using webNews.Shared;
+using static webNews.FilterConfig;
 
 namespace webNews.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly ISystemService _systemService;
 
@@ -16,6 +20,7 @@ namespace webNews.Controllers
         }
 
         // GET: /Home/
+        [GZipOrDeflate]
         public ActionResult Index()
         {
             var filter = new webNews.Models.Filter
@@ -39,14 +44,35 @@ namespace webNews.Controllers
             return View();
         }
 
-        public ActionResult ChangeLanguage(string lang)
+        public ActionResult ChangeLanguage(string id)
         {
-            Authentication.MarkLanguage(lang);
+            // Validate input
+            id = CultureHelper.GetImplementedCulture(id);
+            // Save culture in a cookie
+            HttpCookie cookie = Request.Cookies["_culture"];
+            if (cookie != null)
+                cookie.Value = id;   // update cookie value
+            else
+            {
+                cookie = new HttpCookie("_culture");
+                cookie.Value = id;
+                cookie.Expires = DateTime.Now.AddYears(1);
+            }
+            Authentication.MarkLanguage(id);
+            Response.Cookies.Add(cookie);
+            return RedirectToAction("Index");
+        }
+        public ActionResult SetCulture(string id)
+        {
+            // Validate input
+            id = CultureHelper.GetImplementedCulture(id);
+            RouteData.Values["language"] = id;  // set culture
 
-            return null;
+
+            return RedirectToAction("Index");
         }
 
-        public ActionResult SendEmail()
+        public ActionResult Contact()
         {
             return null;
         }

@@ -2,10 +2,12 @@
 using System.Web.Mvc;
 using webNews.Domain.Services;
 using webNews.Security;
+using static webNews.FilterConfig;
 
 namespace webNews.Controllers
 {
-    public class ContactController : Controller
+    [OutputCache(CacheProfile = "StaticPage")]
+    public class ContactController : BaseController
     {
         private readonly ISystemService _systemService;
 
@@ -13,11 +15,11 @@ namespace webNews.Controllers
         {
             _systemService = systemService;
         }
+
         // GET: Contact
+        [GZipOrDeflate]
         public ActionResult Index()
         {
-
-
             return View();
         }
     }

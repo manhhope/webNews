@@ -9,7 +9,7 @@ using static webNews.FilterConfig;
 namespace webNews.Controllers
 {
     [Language]
-    public class ErrorController : Controller
+    public class ErrorController : BaseController
     {
         //
         private readonly Logger _log = LogManager.GetLogger("ErrorController");

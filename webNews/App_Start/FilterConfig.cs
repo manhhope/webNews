@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Globalization;
 using System.IO.Compression;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
+using webNews.Shared;
 
 namespace webNews
 {
@@ -11,7 +13,11 @@ namespace webNews
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
+            filters.Add(new NoCache());
+            filters.Add(new GZipOrDeflateAttribute());
+            filters.Add(new InternationalizationAttribute());
         }
+
         public class LanguageAttribute : ActionFilterAttribute
         {
             public override void OnActionExecuting(ActionExecutingContext filterContext)
@@ -59,6 +65,26 @@ namespace webNews
                                           CompressionMode.Compress);
                     }
                 }
+            }
+        }
+
+        public class InternationalizationAttribute : ActionFilterAttribute
+        {
+
+            public override void OnActionExecuting(ActionExecutingContext filterContext)
+            {
+
+                string language = (string)filterContext.RouteData.Values["language"] ?? "vi";
+                string cultureName = CultureHelper.GetImplementedCulture(language); // This is safe
+
+                if(language != "en")
+                {
+                    filterContext.RouteData.Values["language"] = "en";
+                }
+
+                Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(cultureName);
+                Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(cultureName);
+
             }
         }
     }

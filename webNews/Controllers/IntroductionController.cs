@@ -6,10 +6,11 @@ using System.Web.Mvc;
 using webNews.Domain.Entities;
 using webNews.Domain.Services;
 using webNews.Security;
+using static webNews.FilterConfig;
 
 namespace webNews.Controllers
 {
-    public class IntroductionController : Controller
+    public class IntroductionController : BaseController
     {
         private readonly ISystemService _systemService;
 
@@ -19,6 +20,7 @@ namespace webNews.Controllers
         }
 
         // GET: Introduction
+        [GZipOrDeflate]
         public ActionResult Index()
         {
             //if (!CheckAuthorizer.IsAuthenticated())
@@ -42,12 +44,11 @@ namespace webNews.Controllers
 
             return View();
         }
-        public ActionResult Detail()
+        [GZipOrDeflate]
+        [OutputCache(CacheProfile = "PageDetail")]
+        public ActionResult Detail(int id)
         {
-
-            var newsId = Convert.ToInt32(HttpContext.Request.Params.Get("id"));
-
-            var news = _systemService.GetNews(newsId, News.TYPE_INTRODUCTION);
+            var news = _systemService.GetNews(id, News.TYPE_INTRODUCTION);
 
             if (null == news)
                 return RedirectToAction("Error", "Index");

@@ -10,6 +10,8 @@
                     <input id="keyword" name="keyword" type="text" autocomplete="off" value="Search" onblur="if(this.value == ''){this.value = 'Search';}" onfocus="if(this.value == 'Search'){this.value = '';};" />
                 </form>
             </li>
+            <li><a class="language-vi" href="/home/SetCulture/vi"></a></li>
+            <li><a class="language-en" href="/home/SetCulture/en"></a></li>
         </ul>
         <div class="cl">
         </div>
@@ -32,6 +34,9 @@
                     });
                 } else {
                     var pathArray = window.location.pathname.split('/');
+                    //if (window.location.pathname.startsWith('/')) {
+                    //    _activeUrl = pathArray
+                    //}
                     _activeUrl = pathArray[1].toLowerCase();
 
                     var _objMenuActive = $("ul.w-header-menu li a");

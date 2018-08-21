@@ -7,10 +7,11 @@ using webNews.Domain.Entities;
 using webNews.Domain.Services;
 using webNews.Models;
 using webNews.Security;
+using static webNews.FilterConfig;
 
 namespace webNews.Controllers
 {
-    public class NewsController : Controller
+    public class NewsController : BaseController
     {
         private readonly ISystemService _systemService;
 
@@ -20,6 +21,7 @@ namespace webNews.Controllers
         }
 
         // GET: News
+        [GZipOrDeflate]
         public ActionResult Index()
         {
             var newsCategorieId = Convert.ToInt32(HttpContext.Request.Params.Get("cateId"));
@@ -41,7 +43,9 @@ namespace webNews.Controllers
 
             return View();
         }
-        
+
+        [GZipOrDeflate]
+        [OutputCache(CacheProfile = "PageDetail")]
         public ActionResult Detail(int id)
         {
            

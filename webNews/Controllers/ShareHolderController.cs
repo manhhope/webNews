@@ -7,10 +7,11 @@ using webNews.Domain.Entities;
 using webNews.Domain.Services;
 using webNews.Models;
 using webNews.Security;
+using static webNews.FilterConfig;
 
 namespace webNews.Controllers
 {
-    public class ShareHolderController : Controller
+    public class ShareHolderController : BaseController
     {
         private readonly ISystemService _systemService;
 
@@ -20,6 +21,7 @@ namespace webNews.Controllers
         }
 
         // GET: ShareHolder
+        [GZipOrDeflate]
         public ActionResult Index()
         {
             var newsCategorieId = Convert.ToInt32(HttpContext.Request.Params.Get("cateId"));
@@ -48,12 +50,11 @@ namespace webNews.Controllers
             return View();
         }
 
-        public ActionResult Detail()
+        [GZipOrDeflate]
+        [OutputCache(CacheProfile = "PageDetail")]
+        public ActionResult Detail(int id)
         {
-
-            var newsId = Convert.ToInt32(HttpContext.Request.Params.Get("id"));
-
-            var news = _systemService.GetNews(newsId, News.TYPE_SHAREHOLDER);
+            var news = _systemService.GetNews(id, News.TYPE_SHAREHOLDER);
 
             if (null == news)
                 return RedirectToAction("Error", "Index");

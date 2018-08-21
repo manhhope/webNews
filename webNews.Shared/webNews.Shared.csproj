@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CryptUtils.cs" />
+    <Compile Include="CultureHelper.cs" />
     <Compile Include="EmailUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceStackHelper.cs" />

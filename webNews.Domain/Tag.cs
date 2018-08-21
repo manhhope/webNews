@@ -14,17 +14,13 @@ using ServiceStack;
 
 namespace webNews.Domain.Entities
 {
-	[Alias("Banner")]
-    public partial class Banner : IHasId<int> 
+	[Alias("Tag")]
+    public partial class Tag : IHasId<string> 
     {
-        [Alias("Id")]
-        [AutoIncrement]
-        public int Id { get; set; }
+        [Alias("TagId")]
         [Required]
-        public int Type { get; set; }
-        public string Title { get; set; }
-        public string MetaTitle { get; set; }
-        public string Url { get; set; }
+        public string Id { get; set; }
+        public string TagName { get; set; }
     }
 
 }

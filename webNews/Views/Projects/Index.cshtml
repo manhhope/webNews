@@ -1,11 +1,11 @@
 ﻿@{
-    ViewBag.Title = "Dự án";
+    ViewBag.Title = @lang.Project_Title;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @using webNews.Domain.Entities;
 @using System.Globalization;
 @using webNews.Security;
-<script src="~/ThemeFE/Scripts/Plugin/Pagging/pagging.js"></script>
+@using lang = webNews.Language.Language.Resource
 <div id="content">
     <div id="leftcontent">
         <div class="webpartcontent">
@@ -46,7 +46,7 @@
                 </ul>
                 <div class="clear">
                 </div>
-                <script src="../../Scripts/Plugin/Pagging/pagging.js" type="text/javascript"></script>
+                <script src="~/ThemeFE/Scripts/Plugin/Pagging/pagging.js" type="text/javascript"></script>
                 <script type="text/javascript">
                     $(document).ready(function () {
                         /* initiate plugin */
@@ -69,7 +69,7 @@
     <div id="rightcontent">
         <div class="webpartcontent">
             <h2>
-                Dự án đầu tư
+                @lang.Project_Title
             </h2>
             <div class="menuleft">
                 <ul class="lt nic-treeview">
@@ -102,7 +102,7 @@
         </div>
         <div class="webpartcontent" style="display:none;">
             <h2>
-                <a href="../../thu-vien-hinh-anh/index.html" title="Thư viện ảnh">Thư viện ảnh</a>
+                <a href="../../thu-vien-hinh-anh/index.html" title="@lang.Image_Gallery">@lang.Image_Gallery</a>
             </h2>
             <div class="gallerylist">
                 <ul class="list-item gallery">
@@ -116,7 +116,7 @@
         </div>
         <div class="webpartcontent" style="display:none;">
             <h2>
-                <a href="../../thu-vien-hinh-anh/index.html" title="Thư viện Video">Thư viện Video</a>
+                <a href="../../thu-vien-hinh-anh/index.html" title="@lang.Video_Gallery">@lang.Video_Gallery</a>
             </h2>
             <div class="gallerylist">
                 <embed width="245" height="135" wmode="transparent" type="application/x-shockwave-flash" src="https://www.youtube.com/v/m1g36ymGxNY" />

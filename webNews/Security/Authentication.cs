@@ -6,6 +6,7 @@ using webNews.Domain;
 using webNews.Domain.Entities;
 using System.Web.Caching;
 using static System.String;
+using System.Threading;
 
 namespace webNews.Security
 {
@@ -103,7 +104,7 @@ namespace webNews.Security
             if (listChild.Any())
             {
                 menu += "<li> " +
-                    $"<a href=\"{item.Slug}\">{item.Text.ToUpper()}</a>";
+                    $"<a href=\"/{item.Slug}\">{item.Text.ToUpper()}</a>";
                 if (item.MenuLevel != null)
                     menu += "<ul>";
                 menu = listChild.Aggregate(menu, (current, submenu) => current + BuildMenuFE(submenu, menus, lang));
@@ -113,11 +114,11 @@ namespace webNews.Security
             {
                 if (item.Area == "FE" || item.Area == "")
                 {
-                    menu += $"<li><a title=\"{item.Text}\" href=\"{item.Slug}\">{item.Text.ToUpper()}</a></li>";
+                    menu += $"<li><a title=\"{item.Text}\" href=\"/{item.Slug}\">{item.Text.ToUpper()}</a></li>";
                 }
                 else
                 {
-                    menu += $"<li><a title=\"{item.Text}\" href=\"{item.Slug}\">{item.Text.ToUpper()}</a></li>";
+                    menu += $"<li><a title=\"{item.Text}\" href=\"/{item.Slug}\">{item.Text.ToUpper()}</a></li>";
                 }
             }
             

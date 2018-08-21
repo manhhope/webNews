@@ -6,7 +6,9 @@
 @using System.Globalization;
 @using webNews.Security;
 @model webNews.Domain.Entities.News
-
+@using lang = webNews.Language.Language.Resource
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b7bf115f12483a5"></script>
 <script src="~/ThemeFE/Scripts/Plugin/Pagging/pagging.js"></script>
 <div id="content">
     <div id="leftcontent">
@@ -21,14 +23,16 @@
                                 <h3 class="title">@Model.Title</h3>
                                 <span class="date">
                                     @(Model.CreatedDate != null ? Model.CreatedDate.Value.ToString("dddd, dd/MM/yyyy, HH:mm", Authentication.GetLanguageCode() == "vi" ?
-                                         new CultureInfo("vi-VN") : new CultureInfo("en-US")) : "")
+                                                                         new CultureInfo("vi-VN") : new CultureInfo("en-US")) : "")
                                 </span>
                             </div>
                         </div>
-
+                        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                        <div class="addthis_inline_share_toolbox"></div>
                         <div class="fullcontent">
                             @Html.Raw(Model.Content)
                         </div>
+                        <div class="addthis_inline_share_toolbox"></div>
                         @RenderPage("../Shared/_LikePartial.cshtml")
 
                     </div>
@@ -41,7 +45,7 @@
     <div id="rightcontent">
         <div class="webpartcontent">
             <h2>
-                Tin tức - sự kiện
+                @lang.NewsEvent_Title
             </h2>
             <div class="menuleft">
                 <ul class="lt nic-treeview">
@@ -74,7 +78,7 @@
         </div>
         <div class="webpartcontent">
             <h2>
-                Các tin khác
+                @lang.Other_News
             </h2>
             <!-- Các tin khác -->
             <div class="articlecontinue">
@@ -86,15 +90,21 @@
                             foreach (var news in newsList)
                             {
                                 <li class="item">
-                                    <a href="@news.Slug" title="@news.Title">
-                                        @news.Title
-                                    </a>
+                                    @{
+                                        var namePost = news.Slug;
+                                        if (string.IsNullOrEmpty(namePost))
+                                        {
+                                            namePost = webNews.Shared.UrlUtil.ToFriendlyUrl(news.Title);
+                                        }
+                                    }
+
+                                    <a href="@Url.RouteUrl("NewsDetail", new { category_name = "tin-tuc", post_name = namePost, id = news.Id })" title="@news.Title">@news.Title</a>
                                 </li>
                             }
                         }
 
                     }
-                    
+
                 </ul>
 
                 <a href="/news" class="viewmore">Xem thêm</a>

@@ -133,7 +133,7 @@ namespace webNews.Domain.Repositories
                 using (var db = _connectionFactory.Open())
                 {
                     var query = db.From<ProjectCategory>();
-                    query = query.Where(x => x.Status == 1 && (filter.Lang != "all" || x.Lang == filter.Lang));
+                    query = query.Where(x => x.Status == 1 && (filter.Lang == "all" || x.Lang == filter.Lang));
 
                     return db.Select(query);
 
@@ -466,6 +466,11 @@ namespace webNews.Domain.Repositories
                             .Where(x => x.CategoryId == news.CategoryId && x.Lang == news.Lang)
                             .OrderByDescending(x => x.CreatedDate).Take(10);
                         news.RelateNews = db.Select(query);
+
+                        var queryTag = db.From<Tag>().Join<ContentTag, Tag>((c, t) => c.TagId == t.Id)
+                            .Where<ContentTag>(x => x.Id == news.Id);
+
+                        news.ListTags = db.Select(queryTag);
                     }
 
                     return news;

@@ -6,6 +6,7 @@
 @using System.Globalization;
 @using webNews.Security;
 @model webNews.Domain.Entities.News
+@using lang = webNews.Language.Language.Resource
 
 <script src="~/ThemeFE/Scripts/Plugin/Pagging/pagging.js"></script>
 <div id="content">
@@ -21,7 +22,7 @@
                                 <h3 class="title">@Model.Title</h3>
                                 <span class="date">
                                     @(Model.CreatedDate != null ? Model.CreatedDate.Value.ToString("dddd, dd/MM/yyyy, HH:mm", Authentication.GetLanguageCode() == "vi" ?
-                                         new CultureInfo("vi-VN") : new CultureInfo("en-US")) : "")
+                                                 new CultureInfo("vi-VN") : new CultureInfo("en-US")) : "")
                                 </span>
                             </div>
                         </div>
@@ -41,7 +42,7 @@
     <div id="rightcontent">
         <div class="webpartcontent">
             <h2>
-                Tin tức - sự kiện
+                @lang.Investment_Title
             </h2>
             <div class="menuleft">
                 <ul class="lt nic-treeview">
@@ -74,7 +75,7 @@
         </div>
         <div class="webpartcontent">
             <h2>
-                Các tin khác
+                @lang.Other_News
             </h2>
             <!-- Các tin khác -->
             <div class="articlecontinue">
@@ -94,7 +95,7 @@
                         }
 
                     }
-                    
+
                 </ul>
 
                 <a href="/news" class="viewmore">Xem thêm</a>

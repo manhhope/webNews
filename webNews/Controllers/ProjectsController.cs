@@ -5,10 +5,11 @@ using System.Web;
 using System.Web.Mvc;
 using webNews.Domain.Services;
 using webNews.Security;
+using static webNews.FilterConfig;
 
 namespace webNews.Controllers
 {
-    public class ProjectsController : Controller
+    public class ProjectsController : BaseController
     {
         private readonly ISystemService _systemService;
 
@@ -17,6 +18,8 @@ namespace webNews.Controllers
             _systemService = systemService;
         }
         // GET: Projects
+        [GZipOrDeflate]
+        [OutputCache(CacheProfile = "StaticPage")]
         public ActionResult Index()
         {
             //if (!CheckAuthorizer.IsAuthenticated())

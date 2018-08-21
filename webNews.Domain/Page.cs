@@ -23,6 +23,7 @@ namespace webNews.Domain.Entities
         public string Code { get; set; }
         public string Name { get; set; }
         public string Title { get; set; }
+        public string MetaTitle { get; set; }
         public string Slug { get; set; }
         public string Action { get; set; }
         public string Content { get; set; }

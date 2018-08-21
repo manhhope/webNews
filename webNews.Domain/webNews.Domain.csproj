@@ -75,6 +75,9 @@
     <Compile Include="Banner.cs">
       <DependentUpon>OrmLite.Poco.tt</DependentUpon>
     </Compile>
+    <Compile Include="ContentTag.cs">
+      <DependentUpon>OrmLite.Poco.tt</DependentUpon>
+    </Compile>
     <Compile Include="DomainModule.cs" />
     <Compile Include="Entities\HomePageInfo.cs" />
     <Compile Include="Entities\Medium.cs" />
@@ -164,6 +167,9 @@
       <DependentUpon>OrmLite.Poco.tt</DependentUpon>
     </Compile>
     <Compile Include="System_User.cs">
+      <DependentUpon>OrmLite.Poco.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Tag.cs">
       <DependentUpon>OrmLite.Poco.tt</DependentUpon>
     </Compile>
     <Compile Include="Temp_Code.cs">

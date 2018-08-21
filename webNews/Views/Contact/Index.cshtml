@@ -1,12 +1,12 @@
 ﻿@{
-    ViewBag.Title = "Liên hệ";
+    ViewBag.Title = lang.Contact_Information;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @using webNews.Domain.Entities;
 @using webNews.Domain
 @using System.Globalization;
 @using webNews.Security;
-
+@using lang = webNews.Language.Language.Resource
 @{
     HomePageInfo pageInfo = new HomePageInfo();
     var homePageInfo = Authentication.GetHomePageInfo();
@@ -20,21 +20,22 @@
 <div id="content">
     <div id="leftcontent">
         <div class="webpartcontent" style="margin-top: 27px;">
-            <iframe width="628" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/d/u/0/embed?mid=1CnXG4dYWkdo0b5XtmAdHpPg2TEkRx9fA"></iframe><br /><small>Xem <a href="https://www.google.com/maps/d/u/0/embed?mid=1CnXG4dYWkdo0b5XtmAdHpPg2TEkRx9fA" style="color:#0000FF;text-align:left">@pageInfo.Options.CompanyName</a> ở bản đồ lớn hơn</small>
-                                                                                                                                                                                                                <div class="info_address">
-                                                                                                                                                                                                                    <strong>@pageInfo.Options.CompanyName</strong> <br />
-                                                                                                                                                                                                                    @pageInfo.Options.CompanyAddress<br />
-                                                                                                                                                                                                                    Điện thoại: @pageInfo.Options.CompanyPhone<br />
-                                                                                                                                                                                                                    Email: @pageInfo.Options.CompanyEmail / Webiste: @pageInfo.Options.CompanyWebsite<br />
-                                                                                                                                                                                                                </div>
+            <iframe width="628" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/d/u/0/embed?mid=1CnXG4dYWkdo0b5XtmAdHpPg2TEkRx9fA"></iframe><br />
+            <small>@lang.View <a href="https://www.google.com/maps/d/u/0/embed?mid=1CnXG4dYWkdo0b5XtmAdHpPg2TEkRx9fA" style="color:#0000FF;text-align:left">@pageInfo.Options.CompanyName</a> @lang.In_Larger_Map</small>
+            <div class="info_address">
+                <strong>@pageInfo.Options.CompanyName</strong> <br />
+                @pageInfo.Options.CompanyAddress<br />
+                Điện thoại: @pageInfo.Options.CompanyPhone<br />
+                Email: @pageInfo.Options.CompanyEmail / Webiste: @pageInfo.Options.CompanyWebsite<br />
+            </div>
             <div id="form-contact">
-                <form action="http://info@flc.vn/lien-he" enctype="multipart/form-data" method="post">
+                <form action="/home/contact" enctype="multipart/form-data" method="post">
                     <input name="__RequestVerificationToken" type="hidden" value="K8sEQJ6XQvVuq4HYzyNuFi5xthuxh7c8i1F+YzLifi7/EhhlqfCdYcC83+YyrUmP1wrjPNtfIUDovMcotM1Cl6hvIUZks9Dh9LjLWY/fiDS9tzXsolgkdnDqMB13DoUprOVkEx03HDZnSDTCdd1tyEX584imCU/St5ZwLMRETq8=" />
                     <table>
                         <tr>
                             <td>
                                 <h3 class="title">
-                                    Gửi yêu cầu của bạn cho chúng tôi
+                                    @lang.Contact_Information
                                 </h3>
                             </td>
                         </tr>
@@ -43,17 +44,17 @@
                         </tr>
                         <tr>
                             <td>
-                                <input id="FullName" name="FullName" type="text" onfocus="if(this.value == 'Họ và tên người gửi'){this.value = '';};" onblur="if(this.value == ''){this.value = 'Họ và tên người gửi';}" value="Họ và tên người gửi" autocomplete="off" />
+                                <input id="FullName" name="FullName" type="text" onfocus="if(this.value == '@lang.Sender_Name'){this.value = '';};" onblur="if(this.value == ''){this.value = '@lang.Sender_Name';}" value="@lang.Sender_Name" autocomplete="off" />
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <input id="Email" name="Email" type="text" onfocus="if(this.value == 'Email của bạn'){this.value = '';};" onblur="if(this.value == ''){this.value = 'Email của bạn';}" value="Email của bạn" autocomplete="off" />
+                                <input id="Email" name="Email" type="text" onfocus="if(this.value == '@lang.Sender_Email'){this.value = '';};" onblur="if(this.value == ''){this.value = '@lang.Sender_Email';}" value="@lang.Sender_Email" autocomplete="off" />
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label for="ContactContent">Nội dung</label>:
+                                <label for="ContactContent">@lang.Sender_Content</label>:
                             </td>
                         </tr>
                         <tr>
@@ -61,7 +62,7 @@
                                 <textarea cols="20" id="ContactContent" name="ContactContent" rows="2">
 
 </textarea>
-                                <input type="submit" value="Gửi" />
+                                <input type="submit" value="@lang.Btn_Send" />
                             </td>
                         </tr>
                     </table>
@@ -72,7 +73,7 @@
     <div id="rightcontent">
         <div class="webpartcontent">
             <h2>
-                Tin tức - sự kiện
+                @lang.Contact_Information
             </h2>
             <div class="menuleft">
                 <ul class="lt nic-treeview">
@@ -105,7 +106,7 @@
         </div>
         <div class="webpartcontent" style="display:none;">
             <h2>
-                <a href="../../thu-vien-hinh-anh/index.html" title="Thư viện ảnh">Thư viện ảnh</a>
+                <a href="../../thu-vien-hinh-anh/index.html" title="@lang.Image_Gallery">@lang.Image_Gallery</a>
             </h2>
             <div class="gallerylist">
                 <ul class="list-item gallery">
@@ -119,7 +120,7 @@
         </div>
         <div class="webpartcontent" style="display:none;">
             <h2>
-                <a href="../../thu-vien-hinh-anh/index.html" title="Thư viện Video">Thư viện Video</a>
+                <a href="../../thu-vien-hinh-anh/index.html" title="@lang.Video_Gallery">@lang.Video_Gallery</a>
             </h2>
             <div class="gallerylist">
                 <embed width="245" height="135" wmode="transparent" type="application/x-shockwave-flash" src="https://www.youtube.com/v/m1g36ymGxNY" />

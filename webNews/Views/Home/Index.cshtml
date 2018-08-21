@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Trang chủ";
+    ViewBag.Title = @lang.Homepage;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -7,10 +7,11 @@
 @using System.Globalization;
 @using webNews.Security;
 @using webNews.Domain
+@using lang = webNews.Language.Language.Resource
 
 <div class="news_event">
     <h2 class="w-title">
-        TIN TỨC - SỰ KIỆN
+        @lang.NewsEvent_Title
     </h2>
     <div class="bg_newevent">
         <div class="w-body-r">
@@ -68,7 +69,7 @@
                         }
                     </ul>
 
-                    <a class="viewmore" href="/news">Xem thêm</a>
+                    <a class="viewmore" href="/news">@lang.ViewMore </a>
                 </div>
             </div>
             <div class="clear">
@@ -79,7 +80,7 @@
 
 <div class="cl">
 </div>
-<h2 class="w-title">DỰ ÁN</h2>
+<h2 class="w-title">@lang.Project_Title</h2>
 
 <div class="w-body-c">
     <div class="listarticle">
@@ -127,7 +128,7 @@
     var partners = Authentication.GetPartners();
     if (partners != null && partners.Count > 0)
     {
-        <h2 class="w-title">ĐỐI TÁC</h2>
+<h2 class="w-title">@lang.Partner_Title</h2>
         <div class="cl">
         </div>
 

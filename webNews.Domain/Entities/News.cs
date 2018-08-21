@@ -20,5 +20,8 @@ namespace webNews.Domain.Entities
 
         [Reference]
         public List<NewsCategory> Categories { get; set; }
+
+        [Reference]
+        public List<Tag> ListTags { get; set; }
     }
 }

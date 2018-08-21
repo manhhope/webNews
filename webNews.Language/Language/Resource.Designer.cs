@@ -223,6 +223,15 @@ namespace webNews.Language.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Gửi.
+        /// </summary>
+        public static string Btn_Send {
+            get {
+                return ResourceManager.GetString("Btn_Send", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Lưu tạm.
         /// </summary>
         public static string Btn_Temp_Save_Lang {
@@ -264,6 +273,24 @@ namespace webNews.Language.Language {
         public static string CodeAutoGen_Lang {
             get {
                 return ResourceManager.GetString("CodeAutoGen_Lang", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thông tin liên hệ.
+        /// </summary>
+        public static string Contact_Information {
+            get {
+                return ResourceManager.GetString("Contact_Information", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Liên hệ.
+        /// </summary>
+        public static string Contact_Title {
+            get {
+                return ResourceManager.GetString("Contact_Title", resourceCulture);
             }
         }
         
@@ -367,11 +394,47 @@ namespace webNews.Language.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Thư viện ảnh.
+        /// </summary>
+        public static string Image_Gallery {
+            get {
+                return ResourceManager.GetString("Image_Gallery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ở bản đồ lớn hơn.
+        /// </summary>
+        public static string In_Larger_Map {
+            get {
+                return ResourceManager.GetString("In_Larger_Map", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Giới thiệu về công ty.
+        /// </summary>
+        public static string Introduction_Title {
+            get {
+                return ResourceManager.GetString("Introduction_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Thông tin không hợp lệ!.
         /// </summary>
         public static string InvalidInfomation_Lang {
             get {
                 return ResourceManager.GetString("InvalidInfomation_Lang", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lĩnh vực đầu tư.
+        /// </summary>
+        public static string Investment_Title {
+            get {
+                return ResourceManager.GetString("Investment_Title", resourceCulture);
             }
         }
         
@@ -394,11 +457,29 @@ namespace webNews.Language.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tin tức - sự kiện.
+        /// </summary>
+        public static string NewsEvent_Title {
+            get {
+                return ResourceManager.GetString("NewsEvent_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ghi chú.
         /// </summary>
         public static string Note_Lang {
             get {
                 return ResourceManager.GetString("Note_Lang", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Các tin khác.
+        /// </summary>
+        public static string Other_News {
+            get {
+                return ResourceManager.GetString("Other_News", resourceCulture);
             }
         }
         
@@ -417,6 +498,15 @@ namespace webNews.Language.Language {
         public static string PageNotFoundMess_Lang {
             get {
                 return ResourceManager.GetString("PageNotFoundMess_Lang", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Đối tác.
+        /// </summary>
+        public static string Partner_Title {
+            get {
+                return ResourceManager.GetString("Partner_Title", resourceCulture);
             }
         }
         
@@ -448,6 +538,24 @@ namespace webNews.Language.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dự án.
+        /// </summary>
+        public static string Project_Title {
+            get {
+                return ResourceManager.GetString("Project_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tuyển dụng.
+        /// </summary>
+        public static string Recruitment {
+            get {
+                return ResourceManager.GetString("Recruitment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Thông tin này bắt buộc phải nhập.
         /// </summary>
         public static string Require_Message_Lang {
@@ -466,11 +574,56 @@ namespace webNews.Language.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Gửi yêu cầu của bạn cho chúng tôi.
+        /// </summary>
+        public static string Send_Email_To_Us {
+            get {
+                return ResourceManager.GetString("Send_Email_To_Us", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nội dung.
+        /// </summary>
+        public static string Sender_Content {
+            get {
+                return ResourceManager.GetString("Sender_Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email của bạn.
+        /// </summary>
+        public static string Sender_Email {
+            get {
+                return ResourceManager.GetString("Sender_Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Họ và tên người gửi.
+        /// </summary>
+        public static string Sender_Name {
+            get {
+                return ResourceManager.GetString("Sender_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Lỗi server!.
         /// </summary>
         public static string ServerError_Lang {
             get {
                 return ResourceManager.GetString("ServerError_Lang", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cổ đông.
+        /// </summary>
+        public static string ShareHolder_Title {
+            get {
+                return ResourceManager.GetString("ShareHolder_Title", resourceCulture);
             }
         }
         
@@ -502,11 +655,38 @@ namespace webNews.Language.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Thư viện video.
+        /// </summary>
+        public static string Video_Gallery {
+            get {
+                return ResourceManager.GetString("Video_Gallery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xem.
+        /// </summary>
+        public static string View {
+            get {
+                return ResourceManager.GetString("View", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Xem.
         /// </summary>
         public static string View_Lang {
             get {
                 return ResourceManager.GetString("View_Lang", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xem thêm.
+        /// </summary>
+        public static string ViewMore {
+            get {
+                return ResourceManager.GetString("ViewMore", resourceCulture);
             }
         }
         
