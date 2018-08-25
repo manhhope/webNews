@@ -189,11 +189,16 @@
     <Compile Include="App_Start\HomepageInfoConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\BranchManageController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ConfigManageController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\IndexController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MediaManageController.cs" />
+    <Compile Include="Areas\Admin\Controllers\NewsManageController.cs" />
     <Compile Include="Areas\Admin\Controllers\PageDemoController.cs" />
     <Compile Include="Areas\Admin\Controllers\PermissionManageController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProjectManageController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoleManageController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoleManagementController.cs" />
     <Compile Include="Areas\Admin\Models\Breadcrumb.cs" />
@@ -389,6 +394,7 @@
     <Content Include="Areas\Admin\Views\Web.config" />
     <Content Include="Areas\Admin\Views\Dashboard\Index.cshtml" />
     <Content Include="Areas\Admin\Views\PageDemo\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\NewsManage\Add.cshtml" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -1408,6 +1414,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Views\BranchManage\" />
+    <Folder Include="Areas\Admin\Views\ConfigManage\" />
+    <Folder Include="Areas\Admin\Views\MediaManage\" />
+    <Folder Include="Areas\Admin\Views\ProjectManage\" />
     <Folder Include="ThemeFE\Images\Gallery\" />
     <Folder Include="ThemeFE\Images\NewsIntro\" />
     <Folder Include="ThemeFE\Images\NewsSupport\" />
